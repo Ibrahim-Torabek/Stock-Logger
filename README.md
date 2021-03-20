@@ -51,8 +51,8 @@ You can estimate the selling price by setting your willing profit.
     </tr>
 </table>
 
-### 1. Active Stock Table
-#### Table Name: Active
+### 2. Sold Stock Table
+#### Table Name: Sold
 #### Table Columns:
 <table>
     <tr>
@@ -81,7 +81,7 @@ You can estimate the selling price by setting your willing profit.
     </tr>
 </table>
 
-
+<hr>
 ## Acknowledgments
 I want to especially thank my teacher Prof. Cai Filiault.
 He taught me how to use Android Studio to complete application
