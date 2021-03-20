@@ -22,6 +22,7 @@
         android:layout_gravity="fill_horizontal"
         android:autoText="true"
         android:ems="10"
+        android:hint="hello"
         android:inputType="textPersonName"
         android:textSize="@dimen/text_size" />
 
@@ -82,7 +83,7 @@
         android:textSize="@dimen/text_size" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/isUSD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Switch" />

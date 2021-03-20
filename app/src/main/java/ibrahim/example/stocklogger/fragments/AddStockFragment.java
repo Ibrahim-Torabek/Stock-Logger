@@ -1,5 +1,6 @@
 package ibrahim.example.stocklogger.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import ibrahim.example.stocklogger.R;
 
@@ -61,6 +67,29 @@ public class AddStockFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_stock, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_stock, container, false);
+
+        EditText symbolEdit = view.findViewById(R.id.symbolEdit);
+        EditText companyNameEdit = view.findViewById(R.id.companyNameEdit);
+        EditText priceEdit = view.findViewById(R.id.priceEdit);
+        EditText quantityEdit = view.findViewById(R.id.quantityEdit);
+        Switch isUSD = view.findViewById(R.id.isUSD);
+        Button addButton = view.findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(symbolEdit.getText().toString().equals("")){
+                    symbolEdit.setBackgroundColor(Color.CYAN);
+                    //symbolEdit.setHintTextColor(Color.CYAN);
+                    Snackbar.make(view, "Symbol Can't be blank", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+                //Snackbar.make(view, "Symbol Can't be blank", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+            }
+        });
+
+
+        return view;
     }
 }
