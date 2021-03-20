@@ -19,4 +19,72 @@ import android.os.Parcelable;
 
 
 public class SoldStock {
+    private int id;
+    private String symbol;
+    private String companyName;
+    private double soldPrice;
+    private double earning;
+
+    public SoldStock() {
+    }
+
+    public SoldStock(String symbol, String companyName, double soldPrice, double earning) {
+        this.symbol = symbol;
+        this.companyName = companyName;
+        this.soldPrice = soldPrice;
+        this.earning = earning;
+    }
+
+    public SoldStock(int id, String symbol, String companyName, double soldPrice, double earning) {
+        this.id = id;
+        this.symbol = symbol;
+        this.companyName = companyName;
+        this.soldPrice = soldPrice;
+        this.earning = earning;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public double getSoldPrice() {
+        return soldPrice;
+    }
+
+    public void setSoldPrice(double soldPrice) {
+        this.soldPrice = soldPrice;
+    }
+
+    public double getEarning() {
+        return earning;
+    }
+
+    public void setEarning(double earning) {
+        this.earning = earning;
+    }
+
+    @Override
+    public String toString() {
+        return companyName;
+    }
 }

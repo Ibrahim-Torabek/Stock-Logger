@@ -21,6 +21,7 @@ import ibrahim.example.stocklogger.pojos.ActiveStock;
  * This class extends SQLiteOpenHelper class to operate the SQLite database.
  *
  * @see android.database.sqlite.SQLiteOpenHelper
+ * @see ActiveStock
  *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
@@ -29,21 +30,19 @@ import ibrahim.example.stocklogger.pojos.ActiveStock;
 
 
 public class ActiveStockDatabase extends SQLiteOpenHelper {
+    // Set database constants
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "stock";
     public static final String TABLE_ACTIVE = "active";
 
-
-    public ActiveStockDatabase(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
+    // Set database columns
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_SYMBOL = "symbol";
     public static final String COLUMN_COMPANY_NAME = "companyName";
     public static final String COLUMN_QUANTITY = "quantity";
     public static final String COLUMN_PRICE = "price";
 
+    // Define create database syntax
     public static final String CREATE_ACTIVE_TABLE = "CREATE TABLE " +
             TABLE_ACTIVE + "(" +
             COLUMN_ID + " INTEGER PRIMARY KEY," +
@@ -52,8 +51,12 @@ public class ActiveStockDatabase extends SQLiteOpenHelper {
             COLUMN_QUANTITY + " TEXT, " +
             COLUMN_PRICE + " TEXT)";
 
+    // Constructor for super class
+    public ActiveStockDatabase(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
 
-
+    // Implement methods
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_ACTIVE_TABLE);
@@ -66,6 +69,7 @@ public class ActiveStockDatabase extends SQLiteOpenHelper {
 
     // CRUD operations
 
+    // Add a new record to the active table
     public void addStock(ActiveStock stock){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -79,6 +83,7 @@ public class ActiveStockDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    // get all stocks from active stock table
     public ArrayList<ActiveStock> getAllStocks(){
         ArrayList<ActiveStock> stocks = new ArrayList<>();
 
@@ -101,6 +106,7 @@ public class ActiveStockDatabase extends SQLiteOpenHelper {
         return  stocks;
     }
 
+    // get stocks which has same stock symbols
     public ArrayList<ActiveStock> getStockBySymbol(String symbol){
         ArrayList<ActiveStock> activeStocks = new ArrayList<>();
 
@@ -124,6 +130,8 @@ public class ActiveStockDatabase extends SQLiteOpenHelper {
         return activeStocks;
     }
 
+    // get unique stock symbols from active stock table.
+    // this method help us to know how many different stocks the user has.
     public ArrayList<String> getStockSymbols(){
         ArrayList<String> symbols = new ArrayList<>();
 
@@ -135,6 +143,7 @@ public class ActiveStockDatabase extends SQLiteOpenHelper {
         return symbols;
     }
 
+    // Update a record
     public int updateStock(ActiveStock stock){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
@@ -145,12 +154,15 @@ public class ActiveStockDatabase extends SQLiteOpenHelper {
         return db.update(TABLE_ACTIVE, values, COLUMN_ID + " = ?", new String[]{String.valueOf(stock.getId())});
     }
 
+    // delete a record
     public void deleteStock(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ACTIVE,COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
     }
 
+    // delete all records of one kind of stock.
+    // we use this method when the user sell a stock.
     public void deleteStockBySymbol(String symbol){
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_ACTIVE, COLUMN_SYMBOL + " = ?", new String[]{symbol});
