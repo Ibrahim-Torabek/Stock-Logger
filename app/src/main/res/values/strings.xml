@@ -104,4 +104,10 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stock_symbol_text">Symbol:</string>
+    <string name="stock_company_text">Company Name:</string>
+    <string name="price_text">Price:</string>
+    <string name="quantity_text">Quantity:</string>
+    <string name="currency_text">is USD?</string>
+    <string name="add_text">ADD</string>
 </resources>
