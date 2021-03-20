@@ -1,5 +1,6 @@
 package ibrahim.example.stocklogger.fragments;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.widget.Switch;
 import com.google.android.material.snackbar.Snackbar;
 
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.databases.ActiveStockDatabase;
+import ibrahim.example.stocklogger.pojos.ActiveStock;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +72,7 @@ public class AddStockFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_stock, container, false);
 
+
         EditText symbolEdit = view.findViewById(R.id.symbolEdit);
         EditText companyNameEdit = view.findViewById(R.id.companyNameEdit);
         EditText priceEdit = view.findViewById(R.id.priceEdit);
@@ -78,14 +82,43 @@ public class AddStockFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Check if an error occurred.
+                boolean error = false;
+
                 if(symbolEdit.getText().toString().equals("")){
-                    symbolEdit.setBackgroundColor(Color.CYAN);
-                    //symbolEdit.setHintTextColor(Color.CYAN);
+                    error = true;
                     Snackbar.make(view, "Symbol Can't be blank", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
-                //Snackbar.make(view, "Symbol Can't be blank", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
+
+                if(companyNameEdit.getText().toString().equals("")){
+                    error = true;
+                    Snackbar.make(view, "Company Name Can't be blank", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+
+                if(priceEdit.getText().toString().equals("")){
+                    error = true;
+                    Snackbar.make(view, "Price Can't be blank", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+                if(quantityEdit.getText().toString().equals("")){
+                    error = true;
+                    Snackbar.make(view, "Quantity Can't be blank", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+
+                // If no any errors
+                if(!error){
+                    ActiveStockDatabase db = new ActiveStockDatabase(getContext());
+                    db.addStock(new ActiveStock(
+                            symbolEdit.getText().toString(),
+                            companyNameEdit.getText().toString(),
+                            Double.parseDouble(priceEdit.getText().toString()),
+                            Integer.parseInt(quantityEdit.getText().toString())
+                    ));
+                }
+
             }
         });
 
