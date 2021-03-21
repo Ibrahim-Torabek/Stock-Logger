@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,6 +118,10 @@ public class AddStockFragment extends Fragment {
                             Double.parseDouble(priceEdit.getText().toString()),
                             Integer.parseInt(quantityEdit.getText().toString())
                     ));
+                    Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    db.close();
+                    Navigation.findNavController(view).popBackStack();
                 }
 
             }
