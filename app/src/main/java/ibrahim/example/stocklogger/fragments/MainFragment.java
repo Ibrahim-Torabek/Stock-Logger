@@ -3,6 +3,7 @@ package ibrahim.example.stocklogger.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,8 +71,7 @@ public class MainFragment extends Fragment {
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Navigation.findNavController(view).navigate(R.id.addStockFragment);
             }
         });
 
