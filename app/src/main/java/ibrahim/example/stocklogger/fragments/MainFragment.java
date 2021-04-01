@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,11 @@ import android.view.ViewGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,6 +79,16 @@ public class MainFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.addStockFragment);
             }
         });
+
+        StockDatabase db = new StockDatabase(getContext());
+
+        ArrayList<Stock> stocks = db.getAllStocks();
+
+        RecyclerView stockRecyclerView = view.findViewById(R.id.activeStocksRecyclerView);
+
+
+
+        db.close();
 
         return view;
     }
