@@ -17,8 +17,9 @@ import android.widget.Switch;
 import com.google.android.material.snackbar.Snackbar;
 
 import ibrahim.example.stocklogger.R;
-import ibrahim.example.stocklogger.databases.ActiveStockDatabase;
+import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
+import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -111,13 +112,29 @@ public class AddStockFragment extends Fragment {
 
                 // If no any errors
                 if(!error){
-                    ActiveStockDatabase db = new ActiveStockDatabase(getContext());
-                    db.addStock(new ActiveStock(
+                    StockDatabase db = new StockDatabase(getContext());
+                    ActiveStock activeStock = new ActiveStock(
                             symbolEdit.getText().toString(),
                             companyNameEdit.getText().toString(),
                             Double.parseDouble(priceEdit.getText().toString()),
-                            Integer.parseInt(quantityEdit.getText().toString())
-                    ));
+                            Integer.parseInt(quantityEdit.getText().toString()),
+                            "2021-03-31"
+                    );
+                    int activeStockId = db.addActiveStock(activeStock);
+                    int stockId = db.getStockId(symbolEdit.getText().toString());
+                    if(stockId == -1){
+                        Stock stock = new Stock(
+                                symbolEdit.getText().toString(),
+                                companyNameEdit.getText().toString(),
+                                0.0,
+                                0.0,
+                                Integer.parseInt(quantityEdit.getText().toString())
+                        );
+                        stockId = db.addStock(stock);
+                    }
+
+                    db.addStockActive(activeStockId, stockId);
+
                     Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     db.close();

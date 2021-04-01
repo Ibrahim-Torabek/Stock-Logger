@@ -3,15 +3,12 @@ package ibrahim.example.stocklogger.pojos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 /**
  * <h1>App for Stock Logger</h1>
  * <h2>Android project of MAD405 Course</h2>
  *
- * This is a class for active stocks. It stores information of stock
- * which user bought. We will pass the object of this class among fragments,
- * so we need to implement Parcelable interface.
+ * This is a class for stocks. It stores information of stock
+ * which the user holds.
  *
  * @see Parcelable
  *
@@ -21,51 +18,53 @@ import java.util.Date;
  */
 
 
-public class ActiveStock implements Parcelable {
+public class Stock implements Parcelable {
+
     private int id;
     private String symbol;
     private String companyName;
-    private double price;
+    private double lastPrice;
+    private double worth;
     private int quantity;
-    private String boughtDate;
 
-    public ActiveStock() {
+    public Stock() {
     }
 
-    public ActiveStock(String symbol, String companyName, double price, int quantity, String boughtDate) {
+    public Stock(String symbol, String companyName, double lastPrice, double worth, int quantity) {
         this.symbol = symbol;
         this.companyName = companyName;
-        this.price = price;
+        this.lastPrice = lastPrice;
+        this.worth = worth;
         this.quantity = quantity;
-        this.boughtDate = boughtDate;
     }
 
-    public ActiveStock(int id, String symbol, String companyName, double price, int quantity, String boughtDate) {
+    public Stock(int id, String symbol, String companyName, double lastPrice, double worth, int quantity) {
         this.id = id;
         this.symbol = symbol;
         this.companyName = companyName;
-        this.price = price;
+        this.lastPrice = lastPrice;
+        this.worth = worth;
         this.quantity = quantity;
-        this.boughtDate = boughtDate;
     }
 
-    protected ActiveStock(Parcel in) {
+    protected Stock(Parcel in) {
         id = in.readInt();
         symbol = in.readString();
         companyName = in.readString();
-        price = in.readDouble();
+        lastPrice = in.readDouble();
+        worth = in.readDouble();
         quantity = in.readInt();
     }
 
-    public static final Creator<ActiveStock> CREATOR = new Creator<ActiveStock>() {
+    public static final Creator<Stock> CREATOR = new Creator<Stock>() {
         @Override
-        public ActiveStock createFromParcel(Parcel in) {
-            return new ActiveStock(in);
+        public Stock createFromParcel(Parcel in) {
+            return new Stock(in);
         }
 
         @Override
-        public ActiveStock[] newArray(int size) {
-            return new ActiveStock[size];
+        public Stock[] newArray(int size) {
+            return new Stock[size];
         }
     };
 
@@ -93,12 +92,20 @@ public class ActiveStock implements Parcelable {
         this.companyName = companyName;
     }
 
-    public double getPrice() {
-        return price;
+    public double getLastPrice() {
+        return lastPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setLastPrice(double lastPrice) {
+        this.lastPrice = lastPrice;
+    }
+
+    public double getWorth() {
+        return worth;
+    }
+
+    public void setWorth(double worth) {
+        this.worth = worth;
     }
 
     public int getQuantity() {
@@ -109,12 +116,11 @@ public class ActiveStock implements Parcelable {
         this.quantity = quantity;
     }
 
-    public String getBoughtDate() {
-        return boughtDate;
-    }
 
-    public void setBoughtDate(String boughtDate) {
-        this.boughtDate = boughtDate;
+
+    @Override
+    public String toString() {
+        return companyName;
     }
 
     @Override
@@ -127,12 +133,8 @@ public class ActiveStock implements Parcelable {
         parcel.writeInt(id);
         parcel.writeString(symbol);
         parcel.writeString(companyName);
-        parcel.writeDouble(price);
+        parcel.writeDouble(lastPrice);
+        parcel.writeDouble(worth);
         parcel.writeInt(quantity);
-    }
-
-    @Override
-    public String toString() {
-        return companyName;
     }
 }
