@@ -8,5 +8,14 @@
         android:id="@+id/nav_main"
         android:name="ibrahim.example.stocklogger.fragments.MainFragment"
         android:label="Dashboard"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_nav_main_to_addStockFragment"
+            app:destination="@id/addStockFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStockFragment"
+        android:name="ibrahim.example.stocklogger.fragments.AddStockFragment"
+        android:label="Add Stock"
+        tools:layout="@layout/fragment_add_stock" />
 </navigation>
