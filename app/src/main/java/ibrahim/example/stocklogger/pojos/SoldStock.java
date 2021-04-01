@@ -1,6 +1,9 @@
 package ibrahim.example.stocklogger.pojos;
 
+import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.Date;
 
 /**
  * <h1>App for Stock Logger</h1>
@@ -18,30 +21,53 @@ import android.os.Parcelable;
  */
 
 
-public class SoldStock {
+public class SoldStock implements Parcelable {
     private int id;
     private String symbol;
     private String companyName;
     private double soldPrice;
     private double earning;
+    private String soldDate;
 
     public SoldStock() {
     }
 
-    public SoldStock(String symbol, String companyName, double soldPrice, double earning) {
+    public SoldStock(String symbol, String companyName, double soldPrice, double earning, String soldDate) {
         this.symbol = symbol;
         this.companyName = companyName;
         this.soldPrice = soldPrice;
         this.earning = earning;
+        this.soldDate = soldDate;
     }
 
-    public SoldStock(int id, String symbol, String companyName, double soldPrice, double earning) {
+    public SoldStock(int id, String symbol, String companyName, double soldPrice, double earning, String soldDate) {
         this.id = id;
         this.symbol = symbol;
         this.companyName = companyName;
         this.soldPrice = soldPrice;
         this.earning = earning;
+        this.soldDate = soldDate;
     }
+
+    protected SoldStock(Parcel in) {
+        id = in.readInt();
+        symbol = in.readString();
+        companyName = in.readString();
+        soldPrice = in.readDouble();
+        earning = in.readDouble();
+    }
+
+    public static final Creator<SoldStock> CREATOR = new Creator<SoldStock>() {
+        @Override
+        public SoldStock createFromParcel(Parcel in) {
+            return new SoldStock(in);
+        }
+
+        @Override
+        public SoldStock[] newArray(int size) {
+            return new SoldStock[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -83,8 +109,30 @@ public class SoldStock {
         this.earning = earning;
     }
 
+    public String getSoldDate() {
+        return soldDate;
+    }
+
+    public void setSoldDate(String soldDate) {
+        this.soldDate = soldDate;
+    }
+
     @Override
     public String toString() {
         return companyName;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(symbol);
+        parcel.writeString(companyName);
+        parcel.writeDouble(soldPrice);
+        parcel.writeDouble(earning);
     }
 }
