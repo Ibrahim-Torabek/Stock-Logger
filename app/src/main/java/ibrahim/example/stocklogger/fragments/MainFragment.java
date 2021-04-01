@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
+import ibrahim.example.stocklogger.Adapters.StocksRecyclerAdapter;
 import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.Stock;
@@ -84,7 +86,11 @@ public class MainFragment extends Fragment {
 
         ArrayList<Stock> stocks = db.getAllStocks();
 
-        RecyclerView stockRecyclerView = view.findViewById(R.id.activeStocksRecyclerView);
+        RecyclerView stockRecyclerView = view.findViewById(R.id.stocksRecyclerView);
+
+        StocksRecyclerAdapter adapter = new StocksRecyclerAdapter(stocks, getContext());
+        stockRecyclerView.setAdapter(adapter);
+        stockRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
 
