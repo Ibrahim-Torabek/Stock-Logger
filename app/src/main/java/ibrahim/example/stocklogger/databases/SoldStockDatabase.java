@@ -52,7 +52,7 @@ public class SoldStockDatabase extends SQLiteOpenHelper {
 
     // Constructor for super class
     public SoldStockDatabase(@Nullable Context context) {
-        super(context, TABLE_SOLD, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     // Implement methods

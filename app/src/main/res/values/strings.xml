@@ -110,4 +110,6 @@
     <string name="quantity_text">Quantity:</string>
     <string name="currency_text">is USD?</string>
     <string name="add_text">ADD</string>
+    <string name="recent_price_text">Recent Price</string>
+    <string name="erning_text">Erning</string>
 </resources>
