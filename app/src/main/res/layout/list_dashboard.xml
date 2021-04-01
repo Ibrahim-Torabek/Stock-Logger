@@ -10,10 +10,8 @@
     tools:showIn="@layout/fragment_main"
     >
 
-    <TextView
-        android:id="@+id/textView2"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stocksRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh  kasdhf ksadhf kjsadhf kasf kasdf lkasdf kasdjhf kasdjf kasdhf kdfskj adfhsk adskjfads kfa sdkfh asdjkhf ksadfh kjasdh "
-        android:textSize="36sp" />
+        android:layout_height="wrap_content"/>
 </androidx.core.widget.NestedScrollView>
