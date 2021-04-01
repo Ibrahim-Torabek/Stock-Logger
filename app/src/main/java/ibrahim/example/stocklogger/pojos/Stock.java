@@ -48,6 +48,16 @@ public class Stock implements Parcelable {
         this.quantity = quantity;
     }
 
+    public Stock(int id, String symbol, String companyName, double lastPrice, double worth, int quantity, boolean isUSD) {
+        this.id = id;
+        this.symbol = symbol;
+        this.companyName = companyName;
+        this.lastPrice = lastPrice;
+        this.worth = worth;
+        this.quantity = quantity;
+        this.isUSD = isUSD;
+    }
+
     protected Stock(Parcel in) {
         id = in.readInt();
         symbol = in.readString();

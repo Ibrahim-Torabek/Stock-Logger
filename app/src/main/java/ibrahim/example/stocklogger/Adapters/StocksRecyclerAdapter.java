@@ -9,6 +9,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,8 +50,18 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull StockCustomViewHolder holder, int position) {
         Stock stock = stocks.get(position);
+        double lastPrice = stock.getLastPrice();
+        double worth = stock.getWorth();
+        int quantity = stock.getQuantity();
+        double earning = (lastPrice - worth) * quantity;
 
         holder.symbolTextView.setText(stock.getSymbol());
+        holder.currencyTextView.setText(stock.isUSD() ? "USD" : "CAD");
+        holder.recentPriceTextView.setText("$" + String.valueOf(lastPrice));
+        holder.erningTextView.setText("$" + String.format("%.2f", earning));
+//        holder.erningTextView.setText("Hello");
+        holder.quantityTextView.setText(String.valueOf(quantity));
+
     }
 
     @Override
@@ -66,6 +77,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         protected TextView recentPriceTextView;
         protected TextView quantityTextView;
 
+
         public StockCustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -74,6 +86,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             erningTextView = itemView.findViewById(R.id.erningTextView);
             recentPriceTextView = itemView.findViewById(R.id.recentPriceTextView);
             quantityTextView = itemView.findViewById(R.id.quantityTextView);
+
         }
     }
 
