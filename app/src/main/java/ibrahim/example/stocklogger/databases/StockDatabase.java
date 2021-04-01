@@ -57,6 +57,7 @@ public class StockDatabase extends SQLiteOpenHelper {
     public static final String COLUMN_LAST_PRICE = "last_price";
     public static final String COLUMN_WORTH = "worth";
     public static final String COLUMN_QUANTITY = "quantity";
+    public static final String COLUMN_IS_USD = "is_usd";
 
     // Active Table
     public static final String COLUMN_STOCK_ID = "stock_id";
@@ -84,7 +85,8 @@ public class StockDatabase extends SQLiteOpenHelper {
             COLUMN_COMPANY_NAME + " TEXT, " +
             COLUMN_LAST_PRICE + " TEXT, " +
             COLUMN_WORTH + " TEXT, " +
-            COLUMN_QUANTITY + " TEXT)";
+            COLUMN_QUANTITY + " TEXT ," +
+            COLUMN_IS_USD + " INTEGER)";
 
     // Create Active Table
     public static final String CREATE_ACTIVE_TABLE = "CREATE TABLE " +
@@ -140,7 +142,8 @@ public class StockDatabase extends SQLiteOpenHelper {
         values.put(COLUMN_LAST_PRICE,stock.getLastPrice());
         values.put(COLUMN_WORTH,stock.getWorth());
         values.put(COLUMN_QUANTITY,stock.getQuantity());
-
+        if(stock.isUSD())
+            values.put(COLUMN_IS_USD,1);
 
         db.insert(TABLE_STOCK,null,values);
         db.close();

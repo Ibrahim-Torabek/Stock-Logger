@@ -130,6 +130,8 @@ public class AddStockFragment extends Fragment {
                                 0.0,
                                 Integer.parseInt(quantityEdit.getText().toString())
                         );
+                        if(isUSD.isChecked())
+                            stock.setUSD(true);
                         stockId = db.addStock(stock);
                     }
 

@@ -26,6 +26,7 @@ public class Stock implements Parcelable {
     private double lastPrice;
     private double worth;
     private int quantity;
+    private boolean isUSD = false;
 
     public Stock() {
     }
@@ -116,7 +117,13 @@ public class Stock implements Parcelable {
         this.quantity = quantity;
     }
 
+    public boolean isUSD() {
+        return isUSD;
+    }
 
+    public void setUSD(boolean USD) {
+        isUSD = USD;
+    }
 
     @Override
     public String toString() {

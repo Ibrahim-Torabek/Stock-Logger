@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/layout_margin"
     android:columnCount="2"
+    android:padding="@dimen/layout_margin"
     tools:context=".fragments.AddStockFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/layout_margin"
         android:text="@string/stock_symbol_text"
         android:textSize="@dimen/text_size" />
 
@@ -24,6 +26,7 @@
         android:ems="10"
         android:hint="hello"
         android:inputType="textPersonName"
+        android:paddingTop="@dimen/layout_margin"
         android:textSize="@dimen/text_size" />
 
     <TextView
@@ -31,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_columnSpan="2"
+        android:paddingTop="@dimen/layout_margin"
         android:text="@string/stock_company_text"
         android:textSize="@dimen/text_size" />
 
@@ -41,12 +45,14 @@
         android:layout_columnSpan="2"
         android:ems="10"
         android:inputType="textPersonName"
+        android:paddingTop="@dimen/layout_margin"
         android:textSize="@dimen/text_size" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/layout_margin"
         android:text="@string/price_text"
         android:textSize="@dimen/text_size" />
 
@@ -57,12 +63,14 @@
         android:layout_gravity="fill_horizontal"
         android:ems="10"
         android:inputType="numberDecimal"
+        android:paddingTop="@dimen/layout_margin"
         android:textSize="@dimen/text_size" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/layout_margin"
         android:text="@string/quantity_text"
         android:textSize="@dimen/text_size" />
 
@@ -73,12 +81,14 @@
         android:layout_gravity="fill_horizontal"
         android:ems="10"
         android:inputType="number"
+        android:paddingTop="@dimen/layout_margin"
         android:textSize="@dimen/text_size" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/layout_margin"
         android:text="@string/currency_text"
         android:textSize="@dimen/text_size" />
 
@@ -86,15 +96,19 @@
         android:id="@+id/isUSD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch" />
+        android:layout_gravity="right"
+        android:paddingTop="@dimen/layout_margin"
+        android:textAlignment="textEnd"
+        android:textSize="@dimen/text_size" />
 
     <Button
         android:id="@+id/addButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_columnSpan="2"
-        android:text="@string/add_text" />
-
+        android:paddingTop="@dimen/layout_margin"
+        android:text="@string/add_text"
+        android:textSize="@dimen/text_size" />
 
 
 </GridLayout>
