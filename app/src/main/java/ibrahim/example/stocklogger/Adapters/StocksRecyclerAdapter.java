@@ -9,6 +9,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -59,8 +60,9 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         holder.currencyTextView.setText(stock.isUSD() ? "USD" : "CAD");
         holder.recentPriceTextView.setText("$" + String.valueOf(lastPrice));
         holder.erningTextView.setText("$" + String.format("%.2f", earning));
-//        holder.erningTextView.setText("Hello");
         holder.quantityTextView.setText(String.valueOf(quantity));
+
+
 
     }
 
@@ -69,13 +71,15 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         return stocks.size();
     }
 
-    class StockCustomViewHolder extends RecyclerView.ViewHolder{
+    class StockCustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView symbolTextView;
         protected TextView currencyTextView;
         protected TextView erningTextView;
         protected TextView recentPriceTextView;
         protected TextView quantityTextView;
+
+        protected LinearLayout activeStockLinearLayout;
 
 
         public StockCustomViewHolder(@NonNull View itemView) {
@@ -86,7 +90,18 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             erningTextView = itemView.findViewById(R.id.erningTextView);
             recentPriceTextView = itemView.findViewById(R.id.recentPriceTextView);
             quantityTextView = itemView.findViewById(R.id.quantityTextView);
+            activeStockLinearLayout = itemView.findViewById(R.id.activeStockLinearLayout);
 
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            activeStockLinearLayout.setVisibility(
+                    activeStockLinearLayout.getVisibility() == View.GONE ?
+                            View.VISIBLE : View.GONE
+            );
         }
     }
 
