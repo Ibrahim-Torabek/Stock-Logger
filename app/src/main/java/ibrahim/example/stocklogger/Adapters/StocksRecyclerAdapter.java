@@ -14,11 +14,14 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
@@ -62,6 +65,14 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         holder.erningTextView.setText("$" + String.format("%.2f", earning));
         holder.quantityTextView.setText(String.valueOf(quantity));
 
+        ArrayList<ActiveStock> activeStocks = new ArrayList<>();
+        StockDatabase db = new StockDatabase(context);
+        activeStocks = db.getAllActiveStocks(stock.getId());
+        db.close();
+
+        RecyclerView activeStockRecyclerView = holder.itemView.findViewById(R.id.activeStockRecyclerView);
+        activeStockRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        activeStockRecyclerView.setAdapter(new ActiveStockRecyclerAdapter(activeStocks, context));
 
 
     }
