@@ -86,6 +86,7 @@ public class MainFragment extends Fragment {
 
         ArrayList<Stock> stocks = db.getAllStocks();
 
+
         RecyclerView stockRecyclerView = view.findViewById(R.id.stocksRecyclerView);
 
         StocksRecyclerAdapter adapter = new StocksRecyclerAdapter(stocks, getContext());
