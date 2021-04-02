@@ -21,8 +21,45 @@ You can estimate the selling price by setting your willing profit.
 ## Database
 ### Database Name: Stock
 ### Tables:
-### 1. Active Stock Table
-#### Table Name: Active
+### 1. Stock Table
+#### Table Name: stock
+#### Table Columns:
+<table>
+    <tr>
+        <th>Column Name</th>
+        <th>Data Type</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>int, Primary Key</td>
+    </tr>
+    <tr>
+        <td>symbol</td>
+        <td>Text</td>
+    </tr>
+    <tr>
+        <td>company_name</td>
+        <td>Text</td>
+    </tr>
+    <tr>
+        <td>last_pricee</td>
+        <td>Double</td>
+    </tr>
+    <tr>
+        <td>worth</td>
+        <td>Double</td>
+    </tr>
+    <tr>
+        <td>quantity</td>
+        <td>int</td>
+    </tr>
+    <tr>
+        <td>is_usd</td>
+        <td>int</td>
+    </tr>
+</table>
+### 2. Active Stock Table
+#### Table Name: active
 #### Table Columns:
 <table>
     <tr>
@@ -42,17 +79,38 @@ You can estimate the selling price by setting your willing profit.
         <td>Text</td>
     </tr>
     <tr>
+        <td>price</td>
+        <td>double</td>
+    </tr>
+    <tr>
         <td>quantity</td>
         <td>int</td>
     </tr>
     <tr>
-        <td>price</td>
-        <td>double</td>
+        <td>bought_date</td>
+        <td>TEXT</td>
     </tr>
 </table>
 
-### 2. Sold Stock Table
-#### Table Name: Sold
+### 3. Stock - Active Stock Relative Table
+#### Table Name: stock_active
+#### Table Columns:
+<table>
+    <tr>
+        <th>Column Name</th>
+        <th>Data Type</th>
+    </tr>
+    <tr>
+        <td>stock</td>
+        <td>int, forien key to stock table</td>
+    </tr>
+    <tr>
+        <td>actie</td>
+        <td>int, forien key to active table</td>
+    </tr>
+</table>
+### 4. Sold Stock Table
+#### Table Name: sold
 #### Table Columns:
 <table>
     <tr>
@@ -82,6 +140,7 @@ You can estimate the selling price by setting your willing profit.
 </table>
 
 <hr>
+
 ## Acknowledgments
 I want to especially thank my teacher Prof. Cai Filiault.
 He taught me how to use Android Studio to complete application
