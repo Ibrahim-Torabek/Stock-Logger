@@ -46,7 +46,7 @@ public class ActiveStockRecyclerAdapter extends RecyclerView.Adapter<ActiveStock
         ActiveStock stock = activeStocks.get(position);
 
         holder.activeDateTextView.setText(stock.getBoughtDate());
-        holder.activePriceTextView.setText(String.valueOf(stock.getPrice()));
+        holder.activePriceTextView.setText(String.format("$%.2f", stock.getPrice()));
         holder.activeQuantityTextView.setText(String.valueOf(stock.getQuantity()));
     }
 

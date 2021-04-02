@@ -37,6 +37,9 @@ public class AddStockFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    // Declare private to use the stock object in different methods.
+    private Stock stock;
+
     public AddStockFragment() {
         // Required empty public constructor
     }
@@ -81,6 +84,20 @@ public class AddStockFragment extends Fragment {
         EditText quantityEdit = view.findViewById(R.id.quantityEdit);
         Switch isUSD = view.findViewById(R.id.isUSD);
         Button addButton = view.findViewById(R.id.addButton);
+
+        if( getArguments() != null){
+            stock = getArguments().getParcelable("STOCK");
+
+            symbolEdit.setEnabled(false);
+            symbolEdit.setText(stock.getSymbol());
+
+            companyNameEdit.setEnabled(false);
+            companyNameEdit.setText(stock.getCompanyName());
+
+            isUSD.setEnabled(false);
+            isUSD.setChecked(stock.isUSD());
+        }
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,7 +152,7 @@ public class AddStockFragment extends Fragment {
                         stockId = db.addStock(stock);
                     }
 
-                    db.addStockActive(activeStockId, stockId);
+                    db.addStockActive(stockId, activeStockId);
 
                     Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
