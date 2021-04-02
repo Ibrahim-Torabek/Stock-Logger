@@ -6,24 +6,30 @@ package ibrahim.example.stocklogger.Adapters;
  */
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
  * <h1>App for Stock Logger</h1>
- * <h2>Android Lab1, Lab2, Lab3, Lab4 of MAD405 Course</h2>
+ * <h2>Android Final Project of MAD405 Course</h2>
  *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
@@ -62,6 +68,23 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         holder.erningTextView.setText("$" + String.format("%.2f", earning));
         holder.quantityTextView.setText(String.valueOf(quantity));
 
+        holder.addStockImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("STOCK",stock);
+                Navigation.findNavController(view).navigate(R.id.addStockFragment, bundle);
+            }
+        });
+
+        ArrayList<ActiveStock> activeStocks = new ArrayList<>();
+        StockDatabase db = new StockDatabase(context);
+        activeStocks = db.getAllActiveStocks(stock.getId());
+        db.close();
+
+        RecyclerView activeStockRecyclerView = holder.itemView.findViewById(R.id.activeStockRecyclerView);
+        activeStockRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        activeStockRecyclerView.setAdapter(new ActiveStockRecyclerAdapter(activeStocks, context));
 
 
     }
@@ -78,6 +101,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         protected TextView erningTextView;
         protected TextView recentPriceTextView;
         protected TextView quantityTextView;
+        protected ImageView addStockImageView;
 
         protected LinearLayout activeStockLinearLayout;
 
@@ -91,6 +115,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             recentPriceTextView = itemView.findViewById(R.id.recentPriceTextView);
             quantityTextView = itemView.findViewById(R.id.quantityTextView);
             activeStockLinearLayout = itemView.findViewById(R.id.activeStockLinearLayout);
+            addStockImageView = itemView.findViewById(R.id.addStockImageView);
 
             itemView.setOnClickListener(this);
 
