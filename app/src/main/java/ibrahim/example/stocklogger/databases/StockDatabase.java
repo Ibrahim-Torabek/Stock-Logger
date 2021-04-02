@@ -225,6 +225,8 @@ public class StockDatabase extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_STOCK, null);
         while (cursor.moveToNext()){
+            // get is_usd column as integer, and save as boolen.
+            boolean isUSD = cursor.getInt(6) == 1 ? true : false;
             stocks.add(
                     new Stock(
                             cursor.getInt(0),
@@ -232,7 +234,8 @@ public class StockDatabase extends SQLiteOpenHelper {
                             cursor.getString(2),
                             cursor.getDouble(3),
                             cursor.getDouble(4),
-                            cursor.getInt(5)
+                            cursor.getInt(5),
+                            isUSD
                     )
             );
         }
