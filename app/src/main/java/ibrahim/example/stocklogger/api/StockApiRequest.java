@@ -34,7 +34,7 @@ public class StockApiRequest extends JsonObjectRequest {
 
     private boolean success = false;
 
-    public StockApiRequest(String url, Stock stock, TextView priceTextxView,  Context context) {
+    public StockApiRequest(String url, Stock stock, TextView priceTextView, TextView erningTextView,  Context context) {
         super(
                 Request.Method.GET,
                 url,
@@ -45,11 +45,16 @@ public class StockApiRequest extends JsonObjectRequest {
                         try {
                             JSONObject mainObject = response.getJSONObject("Global Quote");
                             double price = Double.parseDouble(mainObject.getString("05. price"));
-                            priceTextxView.setText("$" + String.format("%.2f", price));
+                            double earning;
+
                             stock.setLastPrice(price);
                             StockDatabase db = new StockDatabase(context);
                             db.updateStock(stock);
                             db.close();
+
+                            earning = (stock.getLastPrice() - stock.getWorth()) * stock.getQuantity();
+                            priceTextView.setText(String.format("$%.2f", price));
+                            erningTextView.setText(String.format("$%.2f", earning));
                             //success = true;
 
                         } catch (JSONException e) {
