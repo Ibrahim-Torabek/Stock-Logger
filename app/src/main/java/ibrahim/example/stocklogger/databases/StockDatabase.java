@@ -325,6 +325,23 @@ public class StockDatabase extends SQLiteOpenHelper {
         return  stocks;
     }
 
+    public int updateStock(Stock stock){
+
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_SYMBOL,stock.getSymbol());
+        values.put(COLUMN_COMPANY_NAME,stock.getCompanyName());
+        values.put(COLUMN_LAST_PRICE,stock.getLastPrice());
+        values.put(COLUMN_WORTH,stock.getWorth());
+        values.put(COLUMN_QUANTITY,stock.getQuantity());
+
+        return db.update(TABLE_STOCK,
+                values,
+                COLUMN_ID + "=?",
+                new String[]{String.valueOf(stock.getId())});
+    }
+
     private int getLastRowId(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);

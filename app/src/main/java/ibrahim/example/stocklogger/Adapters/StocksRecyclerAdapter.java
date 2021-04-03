@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.R;
-import ibrahim.example.stocklogger.api.StockApi;
+import ibrahim.example.stocklogger.api.StockApiRequest;
+import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.Stock;
@@ -63,11 +63,19 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         int quantity = stock.getQuantity();
         double earning = (lastPrice - worth) * quantity;
 
-        StockApi api = new StockApi(stock.getSymbol(), context);
+
+        String requestUrl = StockApiRequest.URL +
+                "function=" + StockApiRequest.GLOBAL_QUOTE +
+                "&symbol=" + stock.getSymbol() +
+                "&apikey=" + StockApiRequest.APIKEY;
+
+        StockApiRequest request = new StockApiRequest(requestUrl, stock, holder.recentPriceTextView, context);
+        StockSingleton.getInstance(context).getRequestQueue().add(request);
+
 
         holder.symbolTextView.setText(stock.getSymbol());
         holder.currencyTextView.setText(stock.isUSD() ? "USD" : "CAD");
-        holder.recentPriceTextView.setText("$" + String.format("%.2f", api.getPrice()));
+        holder.recentPriceTextView.setText("$" + String.format("%.2f", lastPrice));
 //        holder.recentPriceTextView.setText("$" + String.valueOf(lastPrice));
         holder.erningTextView.setText("$" + String.format("%.2f", earning));
         holder.quantityTextView.setText(String.valueOf(quantity));
