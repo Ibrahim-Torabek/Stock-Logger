@@ -73,7 +73,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         // pass url, stock and textview as parameters
         // pass stock to update the stock database when it successfully get the price.
         // pass priceTextView to update the view when it successfully get the price.
-        StockApiRequest request = new StockApiRequest(requestUrl, stock, holder.recentPriceTextView, context);
+        StockApiRequest request = new StockApiRequest(requestUrl, stock, holder.recentPriceTextView, holder.erningTextView, context);
         StockSingleton.getInstance(context).getRequestQueue().add(request);
 
 

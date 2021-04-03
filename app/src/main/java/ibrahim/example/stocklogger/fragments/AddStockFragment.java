@@ -16,6 +16,8 @@ import android.widget.Switch;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
@@ -139,17 +141,29 @@ public class AddStockFragment extends Fragment {
                     );
                     int activeStockId = db.addActiveStock(activeStock);
                     int stockId = db.getStockId(symbolEdit.getText().toString());
+
+
                     if(stockId == -1){
+                        double worth = (activeStock.getPrice() * activeStock.getQuantity()+2*6.95) / activeStock.getQuantity();
                         Stock stock = new Stock(
                                 symbolEdit.getText().toString(),
                                 companyNameEdit.getText().toString(),
-                                0.0,
-                                0.0,
+                                activeStock.getPrice(),
+                                worth,
                                 Integer.parseInt(quantityEdit.getText().toString())
                         );
                         if(isUSD.isChecked())
                             stock.setUSD(true);
                         stockId = db.addStock(stock);
+                    } else {
+                        double worth = (activeStock.getPrice() * activeStock.getQuantity()+ 6.95) / activeStock.getQuantity();
+                        Stock stock = db.getStock(stockId);
+                        int totalQuantity = stock.getQuantity() + activeStock.getQuantity();
+                        double totalWorth = (stock.getWorth() * stock.getQuantity() + worth * activeStock.getQuantity()) / totalQuantity;
+
+                        stock.setWorth(totalWorth);
+                        stock.setQuantity(totalQuantity);
+                        db.updateStock(stock);
                     }
 
                     db.addStockActive(stockId, activeStockId);

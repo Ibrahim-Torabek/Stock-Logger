@@ -161,9 +161,16 @@ public class StockDatabase extends SQLiteOpenHelper {
         values.put(COLUMN_BOUGHT_DATE,stock.getBoughtDate());
 
         db.insert(TABLE_ACTIVE,null,values);
-
+        db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
+        if(cursor.moveToFirst()){
+            int id = cursor.getInt(0);
+            db.close();
+            return id;
+        }
         db.close();
-        return getLastRowId();
+        return -1;
+
 
 //        db = getReadableDatabase();
 //        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
@@ -218,6 +225,35 @@ public class StockDatabase extends SQLiteOpenHelper {
         db.close();
         return -1;
     }
+
+    public Stock getStock(int id){
+        Stock stock = new Stock();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_STOCK +
+                        " WHERE " + COLUMN_ID + " = " + id,
+                null
+        );
+
+        if(cursor.moveToFirst()){
+            return new Stock(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getDouble(3),
+                    cursor.getDouble(4),
+                    cursor.getInt(5),
+                    cursor.getInt(6) == 1 ? true : false
+            );
+        }
+
+
+        db.close();
+        return null;
+    }
+
     public ArrayList<Stock> getAllStocks(){
         ArrayList<Stock> stocks = new ArrayList<>();
 
