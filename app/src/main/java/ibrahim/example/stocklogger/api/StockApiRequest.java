@@ -31,10 +31,6 @@ public class StockApiRequest extends JsonObjectRequest {
     public static final String URL = "https://www.alphavantage.co/query?";
     public static final String APIKEY = "WMHZQM8S5LZ9EB4W";
     public static final String GLOBAL_QUOTE = "GLOBAL_QUOTE";
-    private String symbol;
-    private double price;
-    private Context context;
-    private Stock stock;
 
     private boolean success = false;
 
@@ -71,32 +67,5 @@ public class StockApiRequest extends JsonObjectRequest {
                         //success = false;
                     }
                 });
-    }
-
-
-
-    private JsonObjectRequest request;
-
-
-
-    public void request(Context context){
-        StockSingleton.getInstance(context).getRequestQueue().add(request);
-    }
-
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 }

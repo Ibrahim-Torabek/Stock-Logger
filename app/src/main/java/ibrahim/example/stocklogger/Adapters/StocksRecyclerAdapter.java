@@ -64,11 +64,15 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         double earning = (lastPrice - worth) * quantity;
 
 
+        // request url
         String requestUrl = StockApiRequest.URL +
                 "function=" + StockApiRequest.GLOBAL_QUOTE +
                 "&symbol=" + stock.getSymbol() +
                 "&apikey=" + StockApiRequest.APIKEY;
 
+        // pass url, stock and textview as parameters
+        // pass stock to update the stock database when it successfully get the price.
+        // pass priceTextView to update the view when it successfully get the price.
         StockApiRequest request = new StockApiRequest(requestUrl, stock, holder.recentPriceTextView, context);
         StockSingleton.getInstance(context).getRequestQueue().add(request);
 
@@ -76,7 +80,6 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         holder.symbolTextView.setText(stock.getSymbol());
         holder.currencyTextView.setText(stock.isUSD() ? "USD" : "CAD");
         holder.recentPriceTextView.setText("$" + String.format("%.2f", lastPrice));
-//        holder.recentPriceTextView.setText("$" + String.valueOf(lastPrice));
         holder.erningTextView.setText("$" + String.format("%.2f", earning));
         holder.quantityTextView.setText(String.valueOf(quantity));
 
