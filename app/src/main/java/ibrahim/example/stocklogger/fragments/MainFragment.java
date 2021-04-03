@@ -12,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.Adapters.StocksRecyclerAdapter;
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.api.StockApiRequest;
+import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.Stock;
 
@@ -85,6 +86,17 @@ public class MainFragment extends Fragment {
         StockDatabase db = new StockDatabase(getContext());
 
         ArrayList<Stock> stocks = db.getAllStocks();
+
+//        for (Stock stock :
+//                stocks) {
+//            String requestUrl = StockApiRequest.URL +
+//                    "function=" + StockApiRequest.GLOBAL_QUOTE +
+//                    "&symbol=" + stock.getSymbol() +
+//                    "&apikey=" + StockApiRequest.APIKEY;
+//
+//            StockApiRequest request = new StockApiRequest(requestUrl, stock, getContext());
+//            StockSingleton.getInstance(getContext()).getRequestQueue().add(request);
+//        }
 
         RecyclerView stockRecyclerView = view.findViewById(R.id.stocksRecyclerView);
 
