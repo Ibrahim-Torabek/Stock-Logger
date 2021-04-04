@@ -1,12 +1,8 @@
 package ibrahim.example.stocklogger.api;
 
-import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -57,7 +53,7 @@ public class StockApiRequest extends JsonObjectRequest {
                             priceTextView.setText(String.format("$%.2f", price));
                             erningTextView.setText(String.format("$%.2f", earning));
 
-                            MainFragment.RefreshDashboard();
+                            MainFragment.refreshDashboard();
                             //success = true;
 
                         } catch (JSONException e) {

@@ -91,6 +91,9 @@ public class MainFragment extends Fragment {
             }
         });
 
+        refreshDashboard();
+
+
         StockDatabase db = new StockDatabase(getContext());
 
         ArrayList<Stock> stocks = db.getAllStocks();
@@ -119,7 +122,7 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-    public static void RefreshDashboard(){
+    public static void refreshDashboard(){
         int totalQuantity = 0;
         double totalActiveEarning = 0;
         double totalSoldEarning = 0;

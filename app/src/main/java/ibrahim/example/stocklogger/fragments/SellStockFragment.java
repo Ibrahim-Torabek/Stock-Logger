@@ -1,22 +1,30 @@
 package ibrahim.example.stocklogger.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.pojos.SoldStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
@@ -78,8 +86,17 @@ public class SellStockFragment extends Fragment  {
         EditText soldPriceEditText = view.findViewById(R.id.soldPriceEditText);
         EditText soldQuantityEditText = view.findViewById(R.id.soldQuantityEditText);
         calendarTextDate = view.findViewById(R.id.calendarTextDate);
+        Button soldButton = view.findViewById(R.id.soldButton);
 
         Calendar c = Calendar.getInstance();
+
+        soldPriceEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                return false;
+            }
+        });
+
 
         // Set current date
         calendarTextDate.setText(DateFormat.getDateInstance().format(c.getTime()));
@@ -91,13 +108,57 @@ public class SellStockFragment extends Fragment  {
             }
         });
 
+
+
         if(getArguments() != null) {
             Stock stock = getArguments().getParcelable("STOCK");
 
             soldNameTextView.setText(stock.getCompanyName());
             soldQuantityEditText.setText(String.valueOf(stock.getQuantity()));
 
+
+            soldButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    boolean error = false;
+
+                    if(soldPriceEditText.getText().toString().equals("")){
+                        error = true;
+                        Snackbar.make(view, "Symbol Can't be blank", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+
+                    if(!error){
+                        double soldPrice = Double.parseDouble(soldPriceEditText.getText().toString());
+                        double worth = stock.getWorth();
+                        double rating = stock.isUSD() ? 1.26 : 1;
+                        int quanity = Integer.parseInt(soldQuantityEditText.getText().toString());
+
+                        double earned = (soldPrice - worth) * quanity * rating;
+
+                        StockDatabase db = new StockDatabase(getContext());
+
+                        db.addSoldStock(
+                                new SoldStock(
+                                        stock.getSymbol(),
+                                        stock.getCompanyName(),
+                                        soldPrice,
+                                        earned,
+                                        calendarTextDate.getText().toString()
+                                )
+                        );
+
+                        db.deleteStock(stock.getId());
+
+                        db.close();
+                        Navigation.findNavController(view).popBackStack();
+                    }
+                }
+            });
         }
+
+
+
 
         return view;
     }
