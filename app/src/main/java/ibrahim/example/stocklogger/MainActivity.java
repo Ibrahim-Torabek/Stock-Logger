@@ -1,8 +1,10 @@
 package ibrahim.example.stocklogger;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.DatePicker;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -16,7 +18,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.DateFormat;
+import java.util.Calendar;
+
+import ibrahim.example.stocklogger.fragments.SellStockFragment;
+
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     public static FloatingActionButton fab;
@@ -61,5 +68,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, i);
+        c.set(Calendar.MONTH, i1);
+        c.set(Calendar.DAY_OF_MONTH, i2);
+
+        String currentDateString = DateFormat.getDateInstance().format(c.getTime());
+        SellStockFragment.calendarTextDate.setText(DateFormat.getDateInstance().format(c.getTime()));
     }
 }

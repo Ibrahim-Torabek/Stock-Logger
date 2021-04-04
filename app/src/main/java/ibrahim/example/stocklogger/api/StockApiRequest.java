@@ -1,12 +1,8 @@
 package ibrahim.example.stocklogger.api;
 
-import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -17,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.fragments.MainFragment;
 import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
@@ -55,6 +52,8 @@ public class StockApiRequest extends JsonObjectRequest {
                             earning = (stock.getLastPrice() - stock.getWorth()) * stock.getQuantity();
                             priceTextView.setText(String.format("$%.2f", price));
                             erningTextView.setText(String.format("$%.2f", earning));
+
+                            MainFragment.refreshDashboard();
                             //success = true;
 
                         } catch (JSONException e) {

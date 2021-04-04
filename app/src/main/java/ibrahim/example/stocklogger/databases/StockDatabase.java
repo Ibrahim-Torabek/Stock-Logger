@@ -132,6 +132,8 @@ public class StockDatabase extends SQLiteOpenHelper {
 
     }
 
+    /************************************  ADD STOCKS  ****************************************/
+
     public int addStock(Stock stock){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -170,17 +172,6 @@ public class StockDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return -1;
-
-
-//        db = getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
-//        if(cursor.moveToFirst()){
-//            int id = cursor.getInt(0);
-//            db.close();
-//            return id;
-//        }
-//        db.close();
-//        return -1;
     }
     public void addSoldStock(SoldStock stock){
 
@@ -208,6 +199,7 @@ public class StockDatabase extends SQLiteOpenHelper {
     }
 
 
+    /************************************  GET STOCKS  ****************************************/
     public int getStockId(String symbol){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -378,6 +370,46 @@ public class StockDatabase extends SQLiteOpenHelper {
                 new String[]{String.valueOf(stock.getId())});
     }
 
+
+    public void deleteStock(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        // Delete Stock
+        db.delete(TABLE_STOCK, COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)});
+
+        deleteAllActiveStocks(id);
+//        db.delete(TABLE_STOCK_ACTIVE, COLUMN_STOCK + "=?",
+//                new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public void deleteAllActiveStocks(int stock){
+        ArrayList<ActiveStock> stocks = getAllActiveStocks(stock);
+
+        for (ActiveStock s :
+                stocks) {
+            deleteActiveStock(s.getId());
+        }
+
+    }
+
+    public void deleteStockActiveRelation(int stock){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_STOCK_ACTIVE, COLUMN_STOCK + "=?",
+                new String[]{String.valueOf(stock)});
+        db.close();
+    }
+
+    public void deleteActiveStock(int id){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(TABLE_ACTIVE, COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)});
+        db.delete(TABLE_STOCK_ACTIVE, COLUMN_ACTIVE + "=?",
+                new String[]{String.valueOf(id)});
+        db.close();
+    }
+
     private int getLastRowId(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
@@ -389,5 +421,8 @@ public class StockDatabase extends SQLiteOpenHelper {
         db.close();
         return -1;
     }
+
+
+
 
 }

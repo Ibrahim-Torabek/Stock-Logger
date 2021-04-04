@@ -1,5 +1,6 @@
 package ibrahim.example.stocklogger.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -20,6 +22,8 @@ import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.api.StockApiRequest;
 import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.pojos.ActiveStock;
+import ibrahim.example.stocklogger.pojos.SoldStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
@@ -37,6 +41,9 @@ public class MainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static View view;
+    private static Context context;
 
     public MainFragment() {
         // Required empty public constructor
@@ -73,7 +80,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        view = inflater.inflate(R.layout.fragment_main, container, false);
+        context = getContext();
 
         FloatingActionButton addFab = view.findViewById(R.id.addFab);
         addFab.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +90,9 @@ public class MainFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.addStockFragment);
             }
         });
+
+        refreshDashboard();
+
 
         StockDatabase db = new StockDatabase(getContext());
 
@@ -109,5 +120,48 @@ public class MainFragment extends Fragment {
         db.close();
 
         return view;
+    }
+
+    public static void refreshDashboard(){
+        int totalQuantity = 0;
+        double totalActiveEarning = 0;
+        double totalSoldEarning = 0;
+        double totalEarning = 0;
+        TextView totalStocksTextView = view.findViewById(R.id.totalStocksTextView);
+        TextView activeStocksTextView = view.findViewById(R.id.activeStocksTextView);
+        TextView soldStocksTextView = view.findViewById(R.id.soldStocksTextView);
+        TextView totalEarningsTextView = view.findViewById(R.id.totalEarningsTextView);
+
+        // Calculate Total stocks in holding
+        StockDatabase db = new StockDatabase(context);
+        ArrayList<Stock> stocks = db.getAllStocks();
+
+        for (Stock stock :
+                stocks) {
+            totalQuantity += stock.getQuantity();
+            totalActiveEarning += (stock.getLastPrice() - stock.getWorth()) * stock.getQuantity();
+        }
+
+        totalStocksTextView.setText(String.valueOf(totalQuantity));
+        activeStocksTextView.setText(String.format("$%.02f", totalActiveEarning));
+
+        // Calculate Active Stocks earnings
+        ArrayList<SoldStock> soldStocks = db.getAllSoldStocks();
+
+        for (SoldStock stock :
+                soldStocks) {
+            totalSoldEarning += (stock.getEarning());
+        }
+
+        soldStocksTextView.setText(String.format("$%.02f", totalSoldEarning));
+
+        totalEarning = totalActiveEarning + totalSoldEarning;
+        totalEarningsTextView.setText(String.format("$%.02f", totalEarning));
+
+
+
+
+        db.close();
+
     }
 }
