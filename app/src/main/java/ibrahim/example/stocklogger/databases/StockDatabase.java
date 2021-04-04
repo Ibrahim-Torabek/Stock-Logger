@@ -132,6 +132,8 @@ public class StockDatabase extends SQLiteOpenHelper {
 
     }
 
+    /************************************  ADD STOCKS  ****************************************/
+
     public int addStock(Stock stock){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -170,17 +172,6 @@ public class StockDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return -1;
-
-
-//        db = getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
-//        if(cursor.moveToFirst()){
-//            int id = cursor.getInt(0);
-//            db.close();
-//            return id;
-//        }
-//        db.close();
-//        return -1;
     }
     public void addSoldStock(SoldStock stock){
 
@@ -208,6 +199,7 @@ public class StockDatabase extends SQLiteOpenHelper {
     }
 
 
+    /************************************  GET STOCKS  ****************************************/
     public int getStockId(String symbol){
 
         SQLiteDatabase db = this.getReadableDatabase();

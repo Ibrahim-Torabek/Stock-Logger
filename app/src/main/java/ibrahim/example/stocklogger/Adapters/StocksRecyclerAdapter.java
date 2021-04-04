@@ -5,7 +5,9 @@ package ibrahim.example.stocklogger.Adapters;
  *  - Complete JavaDoc
  */
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,6 +94,27 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             }
         });
 
+        holder.removeStockImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String symbol = stock.getSymbol();
+                new AlertDialog.Builder(context)
+                        .setTitle(stock.getSymbol())
+                        .setMessage("Did you sell all stocks of " + symbol + "?")
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("STOCK",stock);
+                                Navigation.findNavController(view).navigate(R.id.sellStockFragment, bundle);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
         ArrayList<ActiveStock> activeStocks = new ArrayList<>();
         StockDatabase db = new StockDatabase(context);
         activeStocks = db.getAllActiveStocks(stock.getId());
@@ -117,6 +140,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         protected TextView recentPriceTextView;
         protected TextView quantityTextView;
         protected ImageView addStockImageView;
+        protected ImageView removeStockImageView;
 
         protected LinearLayout activeStockLinearLayout;
 
@@ -131,6 +155,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             quantityTextView = itemView.findViewById(R.id.quantityTextView);
             activeStockLinearLayout = itemView.findViewById(R.id.activeStockLinearLayout);
             addStockImageView = itemView.findViewById(R.id.addStockImageView);
+            removeStockImageView = itemView.findViewById(R.id.removeStockImageView);
 
             itemView.setOnClickListener(this);
 

@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_nav_main_to_addStockFragment"
             app:destination="@id/addStockFragment" />
+        <action
+            android:id="@+id/action_nav_main_to_sellStockFragment2"
+            app:destination="@id/sellStockFragment" />
     </fragment>
     <fragment
         android:id="@+id/addStockFragment"
         android:name="ibrahim.example.stocklogger.fragments.AddStockFragment"
         android:label="Add Stock"
         tools:layout="@layout/fragment_add_stock" />
+    <fragment
+        android:id="@+id/sellStockFragment"
+        android:name="ibrahim.example.stocklogger.fragments.SellStockFragment"
+        android:label="Sell Stock"
+        tools:layout="@layout/fragment_sell_stock" />
 </navigation>

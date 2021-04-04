@@ -22,6 +22,8 @@ import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.api.StockApiRequest;
 import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.pojos.ActiveStock;
+import ibrahim.example.stocklogger.pojos.SoldStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
@@ -119,22 +121,44 @@ public class MainFragment extends Fragment {
 
     public static void RefreshDashboard(){
         int totalQuantity = 0;
+        double totalActiveEarning = 0;
+        double totalSoldEarning = 0;
         double totalEarning = 0;
         TextView totalStocksTextView = view.findViewById(R.id.totalStocksTextView);
+        TextView activeStocksTextView = view.findViewById(R.id.activeStocksTextView);
+        TextView soldStocksTextView = view.findViewById(R.id.soldStocksTextView);
         TextView totalEarningsTextView = view.findViewById(R.id.totalEarningsTextView);
 
+        // Calculate Total stocks in holding
         StockDatabase db = new StockDatabase(context);
-        ArrayList<Stock> stocks = new ArrayList<>();
-        stocks = db.getAllStocks();
+        ArrayList<Stock> stocks = db.getAllStocks();
 
         for (Stock stock :
                 stocks) {
             totalQuantity += stock.getQuantity();
-            totalEarning += (stock.getLastPrice() - stock.getWorth()) * stock.getQuantity();
+            totalActiveEarning += (stock.getLastPrice() - stock.getWorth()) * stock.getQuantity();
         }
 
         totalStocksTextView.setText(String.valueOf(totalQuantity));
+        activeStocksTextView.setText(String.format("$%.02f", totalActiveEarning));
+
+        // Calculate Active Stocks earnings
+        ArrayList<SoldStock> soldStocks = db.getAllSoldStocks();
+
+        for (SoldStock stock :
+                soldStocks) {
+            totalSoldEarning += (stock.getEarning());
+        }
+
+        soldStocksTextView.setText(String.format("$%.02f", totalSoldEarning));
+
+        totalEarning = totalActiveEarning + totalSoldEarning;
         totalEarningsTextView.setText(String.format("$%.02f", totalEarning));
+
+
+
+
+        db.close();
 
     }
 }
