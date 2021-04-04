@@ -1,5 +1,6 @@
 package ibrahim.example.stocklogger.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -37,6 +39,9 @@ public class MainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static View view;
+    private static Context context;
 
     public MainFragment() {
         // Required empty public constructor
@@ -73,7 +78,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        view = inflater.inflate(R.layout.fragment_main, container, false);
+        context = getContext();
 
         FloatingActionButton addFab = view.findViewById(R.id.addFab);
         addFab.setOnClickListener(new View.OnClickListener() {
@@ -109,5 +115,26 @@ public class MainFragment extends Fragment {
         db.close();
 
         return view;
+    }
+
+    public static void RefreshDashboard(){
+        int totalQuantity = 0;
+        double totalEarning = 0;
+        TextView totalStocksTextView = view.findViewById(R.id.totalStocksTextView);
+        TextView totalEarningsTextView = view.findViewById(R.id.totalEarningsTextView);
+
+        StockDatabase db = new StockDatabase(context);
+        ArrayList<Stock> stocks = new ArrayList<>();
+        stocks = db.getAllStocks();
+
+        for (Stock stock :
+                stocks) {
+            totalQuantity += stock.getQuantity();
+            totalEarning += (stock.getLastPrice() - stock.getWorth()) * stock.getQuantity();
+        }
+
+        totalStocksTextView.setText(String.valueOf(totalQuantity));
+        totalEarningsTextView.setText(String.format("$%.02f", totalEarning));
+
     }
 }

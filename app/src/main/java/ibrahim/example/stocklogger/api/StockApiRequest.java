@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.fragments.MainFragment;
 import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
@@ -55,6 +56,8 @@ public class StockApiRequest extends JsonObjectRequest {
                             earning = (stock.getLastPrice() - stock.getWorth()) * stock.getQuantity();
                             priceTextView.setText(String.format("$%.2f", price));
                             erningTextView.setText(String.format("$%.2f", earning));
+
+                            MainFragment.RefreshDashboard();
                             //success = true;
 
                         } catch (JSONException e) {
