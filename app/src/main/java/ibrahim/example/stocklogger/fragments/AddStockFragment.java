@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -171,8 +172,14 @@ public class AddStockFragment extends Fragment {
                     Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     db.close();
+                    symbolEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                    companyNameEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                    priceEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                    quantityEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
                     Navigation.findNavController(view).popBackStack();
                 }
+
+
 
             }
         });
