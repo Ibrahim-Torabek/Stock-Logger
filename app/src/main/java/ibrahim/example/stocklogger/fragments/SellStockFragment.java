@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -124,7 +125,7 @@ public class SellStockFragment extends Fragment  {
 
                     if(soldPriceEditText.getText().toString().equals("")){
                         error = true;
-                        Snackbar.make(view, "Symbol Can't be blank", Snackbar.LENGTH_LONG)
+                        Snackbar.make(view, "Sold price can't be blank", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
 
@@ -151,6 +152,7 @@ public class SellStockFragment extends Fragment  {
                         db.deleteStock(stock.getId());
 
                         db.close();
+                        soldPriceEditText.onEditorAction(EditorInfo.IME_ACTION_DONE);
                         Navigation.findNavController(view).popBackStack();
                     }
                 }
