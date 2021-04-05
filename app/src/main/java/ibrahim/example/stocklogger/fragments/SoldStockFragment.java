@@ -3,12 +3,21 @@ package ibrahim.example.stocklogger.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import ibrahim.example.stocklogger.Adapters.SoldStockRecyclerAdapter;
+import ibrahim.example.stocklogger.Adapters.StocksRecyclerAdapter;
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.pojos.SoldStock;
+import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +70,21 @@ public class SoldStockFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sold_stock, container, false);
+        View view = inflater.inflate(R.layout.fragment_sold_stock, container, false);
+
+        StockDatabase db = new StockDatabase(getContext());
+
+        ArrayList<SoldStock> stocks = db.getAllSoldStocks();
+
+        RecyclerView soldStockRecyclerView = view.findViewById(R.id.soldStockRecyclerView);
+
+        SoldStockRecyclerAdapter adapter = new SoldStockRecyclerAdapter(stocks, getContext());
+        soldStockRecyclerView.setAdapter(adapter);
+        soldStockRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        db.close();
+
+
+        return view;
     }
 }

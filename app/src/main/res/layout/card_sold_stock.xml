@@ -25,23 +25,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/currencyTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:text="TextView"
-            android:textSize="@dimen/title_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/soldSymbolTextView" />
-
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="?android:attr/listDivider"
-            app:layout_constraintTop_toBottomOf="@+id/soldSymbolTextView" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/soldCompanyNameTextView" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_text_spacing"
-                android:text="600"
+                android:text="Apr 4, 2021"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
@@ -68,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/recent_price_text"
+                android:text="Sold Price:"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -78,8 +70,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/quantity_text"
+                android:layout_marginBottom="16dp"
+                android:text="Sold Date"
                 android:textSize="@dimen/text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -114,87 +108,16 @@
                 app:layout_constraintStart_toStartOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
 
-            <ImageView
-                android:id="@+id/addStockImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/icon_background_color"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16"
-                app:srcCompat="@drawable/ic_baseline_add_24" />
-
-            <ImageView
-                android:id="@+id/removeStockImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/icon_background_color"
-                app:layout_constraintEnd_toStartOf="@+id/addStockImageView"
-                app:layout_constraintTop_toTopOf="@+id/addStockImageView"
-                app:srcCompat="@drawable/ic_baseline_remove_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:id="@+id/activeStockLinearLayout"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/soldCompanyNameTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayout">
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="@dimen/layout_margin">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Date"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="Quantity"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="Price"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/activeStockRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/layout_margin" />
-        </LinearLayout>
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/soldSymbolTextView"
+            app:layout_constraintTop_toBottomOf="@+id/soldSymbolTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

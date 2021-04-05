@@ -148,11 +148,11 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         public StockCustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            symbolTextView = itemView.findViewById(R.id.symbolTextView);
+            symbolTextView = itemView.findViewById(R.id.soldSymbolTextView);
             currencyTextView = itemView.findViewById(R.id.currencyTextView);
-            erningTextView = itemView.findViewById(R.id.erningTextView);
-            recentPriceTextView = itemView.findViewById(R.id.recentPriceTextView);
-            quantityTextView = itemView.findViewById(R.id.quantityTextView);
+            erningTextView = itemView.findViewById(R.id.soldEarningTextView);
+            recentPriceTextView = itemView.findViewById(R.id.soldPriceTextView);
+            quantityTextView = itemView.findViewById(R.id.soldDateTextView);
             activeStockLinearLayout = itemView.findViewById(R.id.activeStockLinearLayout);
             addStockImageView = itemView.findViewById(R.id.addStockImageView);
             removeStockImageView = itemView.findViewById(R.id.removeStockImageView);

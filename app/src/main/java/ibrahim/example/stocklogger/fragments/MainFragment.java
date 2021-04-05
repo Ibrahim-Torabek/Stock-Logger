@@ -98,24 +98,11 @@ public class MainFragment extends Fragment {
 
         ArrayList<Stock> stocks = db.getAllStocks();
 
-//        for (Stock stock :
-//                stocks) {
-//            String requestUrl = StockApiRequest.URL +
-//                    "function=" + StockApiRequest.GLOBAL_QUOTE +
-//                    "&symbol=" + stock.getSymbol() +
-//                    "&apikey=" + StockApiRequest.APIKEY;
-//
-//            StockApiRequest request = new StockApiRequest(requestUrl, stock, getContext());
-//            StockSingleton.getInstance(getContext()).getRequestQueue().add(request);
-//        }
-
         RecyclerView stockRecyclerView = view.findViewById(R.id.stocksRecyclerView);
 
         StocksRecyclerAdapter adapter = new StocksRecyclerAdapter(stocks, getContext());
         stockRecyclerView.setAdapter(adapter);
         stockRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
 
         db.close();
 
