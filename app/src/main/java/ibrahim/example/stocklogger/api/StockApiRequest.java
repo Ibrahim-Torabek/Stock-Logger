@@ -28,6 +28,7 @@ public class StockApiRequest extends JsonObjectRequest {
     public static final String URL = "https://www.alphavantage.co/query?";
     public static final String APIKEY = "WMHZQM8S5LZ9EB4W";
     public static final String GLOBAL_QUOTE = "GLOBAL_QUOTE";
+    public static final String SYMBOL_SEARCH = "SYMBOL_SEARCH";
 
     private boolean success = false;
 

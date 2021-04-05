@@ -20,8 +20,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.api.StockApiRequest;
-import ibrahim.example.stocklogger.api.StockAutoCompleteRequest;
 import ibrahim.example.stocklogger.api.StockSingleton;
+import ibrahim.example.stocklogger.fragments.AddStockFragment;
+import ibrahim.example.stocklogger.pojos.AutoCompletedStock;
 
 /**
  * <h1>App for Stock Logger</h1>
@@ -33,6 +34,8 @@ import ibrahim.example.stocklogger.api.StockSingleton;
  */
 public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterable {
     ArrayList<String> symbols;// = new ArrayList<>();
+    public ArrayList<String> companyNames;
+
 
     int resource;
     Context context;
@@ -51,6 +54,7 @@ public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterabl
 
     @Override
     public String getItem(int position) {
+
         return symbols.get(position);
     }
 
@@ -63,8 +67,8 @@ public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterabl
             protected FilterResults performFiltering(CharSequence charSequence) {
                 FilterResults results = new FilterResults();
                 if(charSequence != null){
-                    String requestUrl = StockAutoCompleteRequest.URL +
-                            "function=" + StockAutoCompleteRequest.SYMBOL_SEARCH +
+                    String requestUrl = StockApiRequest.URL +
+                            "function=" + StockApiRequest.SYMBOL_SEARCH +
                             "&keywords=" + charSequence.toString().toUpperCase() +
                             "&apikey=" + StockApiRequest.APIKEY;
 
@@ -79,12 +83,20 @@ public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterabl
                                         JSONArray jsonArray = response.getJSONArray("bestMatches");
 
                                         symbols = new ArrayList<>();
+                                        companyNames = new ArrayList<>();
+                                        ArrayList<AutoCompletedStock> companies = new ArrayList<>();
 
                                         for(int i=0; i < jsonArray.length(); i++){
                                             JSONObject stock = jsonArray.getJSONObject(i);
+                                            String currency = stock.getString("8. currency");
                                             symbols.add(stock.getString("1. symbol"));
+                                            companies.add(new AutoCompletedStock(
+                                                    stock.getString("1. symbol"),
+                                                    stock.getString("2. name"),
+                                                    currency.equals("USD") ? true : false));
                                         }
                                         notifyDataSetChanged();
+                                        AddStockFragment.autoCompletedStocks = companies;
 
 
                                     } catch (JSONException e) {
@@ -115,7 +127,7 @@ public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterabl
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 if(filterResults != null && filterResults.count > 0){
-                    notifyDataSetChanged();
+                    //notifyDataSetChanged();
                 } else {
                     notifyDataSetInvalidated();
                 }
@@ -124,4 +136,6 @@ public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterabl
 
         return filter;
     }
+
+
 }
