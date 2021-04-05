@@ -8,8 +8,8 @@
     android:columnCount="2"
     android:padding="@dimen/layout_margin"
     tools:context=".fragments.AddStockFragment">
+    
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,14 +17,15 @@
         android:text="@string/stock_symbol_text"
         android:textSize="@dimen/text_size" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/symbolEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="fill_horizontal"
-        android:autoText="true"
         android:ems="10"
-        android:hint="hello"
+        android:completionThreshold="1"
+        android:hint="Enter Stock Symbol"
+        android:completionHint="Select Stock Symbol"
         android:inputType="textPersonName"
         android:paddingTop="@dimen/layout_margin"
         android:textSize="@dimen/text_size" />

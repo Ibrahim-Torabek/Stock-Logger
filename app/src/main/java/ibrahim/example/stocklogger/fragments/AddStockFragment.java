@@ -7,10 +7,15 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -19,7 +24,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
+import ibrahim.example.stocklogger.Adapters.SymbolAutoCompleteAdapter;
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.api.StockApiRequest;
+import ibrahim.example.stocklogger.api.StockAutoCompleteRequest;
+import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.Stock;
@@ -39,6 +48,8 @@ public class AddStockFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String[] symbols;
 
     // Declare private to use the stock object in different methods.
     private Stock stock;
@@ -81,12 +92,14 @@ public class AddStockFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_stock, container, false);
 
 
-        EditText symbolEdit = view.findViewById(R.id.symbolEdit);
+        AutoCompleteTextView symbolEdit = view.findViewById(R.id.symbolEdit);
         EditText companyNameEdit = view.findViewById(R.id.companyNameEdit);
         EditText priceEdit = view.findViewById(R.id.priceEdit);
         EditText quantityEdit = view.findViewById(R.id.quantityEdit);
         Switch isUSD = view.findViewById(R.id.isUSD);
         Button addButton = view.findViewById(R.id.addButton);
+
+        symbolEdit.setAdapter(new SymbolAutoCompleteAdapter(getContext(), android.R.layout.simple_list_item_1));
 
         if( getArguments() != null){
             stock = getArguments().getParcelable("STOCK");
