@@ -1,20 +1,15 @@
 package ibrahim.example.stocklogger.fragments;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,11 +21,9 @@ import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.Adapters.SymbolAutoCompleteAdapter;
 import ibrahim.example.stocklogger.R;
-import ibrahim.example.stocklogger.api.StockApiRequest;
-import ibrahim.example.stocklogger.api.StockAutoCompleteRequest;
-import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
+import ibrahim.example.stocklogger.pojos.AutoCompletedStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
@@ -50,6 +43,7 @@ public class AddStockFragment extends Fragment {
     private String mParam2;
 
     private String[] symbols;
+    public static ArrayList<AutoCompletedStock> autoCompletedStocks = new ArrayList<>();
 
     // Declare private to use the stock object in different methods.
     private Stock stock;
@@ -100,6 +94,16 @@ public class AddStockFragment extends Fragment {
         Button addButton = view.findViewById(R.id.addButton);
 
         symbolEdit.setAdapter(new SymbolAutoCompleteAdapter(getContext(), android.R.layout.simple_list_item_1));
+
+        symbolEdit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(autoCompletedStocks != null){
+                    companyNameEdit.setText(autoCompletedStocks.get(i).getCompanyName());
+                    isUSD.setChecked(autoCompletedStocks.get(i).isUSD());
+                }
+            }
+        });
 
         if( getArguments() != null){
             stock = getArguments().getParcelable("STOCK");
