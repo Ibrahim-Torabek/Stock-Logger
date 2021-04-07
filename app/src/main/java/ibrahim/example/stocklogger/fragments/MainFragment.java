@@ -25,6 +25,7 @@ import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.SoldStock;
 import ibrahim.example.stocklogger.pojos.Stock;
+import ibrahim.example.stocklogger.views.PriceTextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,9 +116,11 @@ public class MainFragment extends Fragment {
         double totalSoldEarning = 0;
         double totalEarning = 0;
         TextView totalStocksTextView = view.findViewById(R.id.totalStocksTextView);
-        TextView activeStocksTextView = view.findViewById(R.id.activeStocksTextView);
-        TextView soldStocksTextView = view.findViewById(R.id.soldStocksTextView);
-        TextView totalEarningsTextView = view.findViewById(R.id.totalEarningsTextView);
+
+        // Use PriceTextView to show dependent colors
+        PriceTextView activeStocksTextView = view.findViewById(R.id.activeStocksTextView);
+        PriceTextView soldStocksTextView = view.findViewById(R.id.soldStocksTextView);
+        PriceTextView totalEarningsTextView = view.findViewById(R.id.totalEarningsTextView);
 
         // Calculate Total stocks in holding
         StockDatabase db = new StockDatabase(context);

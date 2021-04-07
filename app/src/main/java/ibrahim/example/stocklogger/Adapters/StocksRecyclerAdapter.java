@@ -8,6 +8,7 @@ package ibrahim.example.stocklogger.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.Stock;
+import ibrahim.example.stocklogger.views.PriceTextView;
 
 /**
  * <h1>App for Stock Logger</h1>
@@ -75,15 +77,19 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         // pass url, stock and textview as parameters
         // pass stock to update the stock database when it successfully get the price.
         // pass priceTextView to update the view when it successfully get the price.
-        StockApiRequest request = new StockApiRequest(requestUrl, stock, holder.recentPriceTextView, holder.erningTextView, context);
+        StockApiRequest request = new StockApiRequest(requestUrl, stock, holder.recentPriceTextView, holder.earningTextView, context);
         StockSingleton.getInstance(context).getRequestQueue().add(request);
 
 
         holder.symbolTextView.setText(stock.getSymbol());
         holder.currencyTextView.setText(stock.isUSD() ? "USD" : "CAD");
         holder.recentPriceTextView.setText("$" + String.format("%.2f", lastPrice));
-        holder.erningTextView.setText("$" + String.format("%.2f", earning));
         holder.quantityTextView.setText(String.valueOf(quantity));
+        holder.earningTextView.setText(String.format("$%.2f", earning));
+
+        if(earning > 0){
+            holder.earningTextView.setTextColor(Color.BLUE);
+        }
 
         holder.addStockImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +142,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
 
         protected TextView symbolTextView;
         protected TextView currencyTextView;
-        protected TextView erningTextView;
+        protected PriceTextView earningTextView;
         protected TextView recentPriceTextView;
         protected TextView quantityTextView;
         protected ImageView addStockImageView;
@@ -150,7 +156,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
 
             symbolTextView = itemView.findViewById(R.id.soldSymbolTextView);
             currencyTextView = itemView.findViewById(R.id.currencyTextView);
-            erningTextView = itemView.findViewById(R.id.soldEarningTextView);
+            earningTextView = itemView.findViewById(R.id.soldEarningTextView);
             recentPriceTextView = itemView.findViewById(R.id.soldPriceTextView);
             quantityTextView = itemView.findViewById(R.id.soldDateTextView);
             activeStockLinearLayout = itemView.findViewById(R.id.activeStockLinearLayout);

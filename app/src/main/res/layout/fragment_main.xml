@@ -60,7 +60,7 @@
                     app:layout_constraintStart_toStartOf="@+id/textView9"
                     app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-                <TextView
+                <ibrahim.example.stocklogger.views.PriceTextView
                     android:id="@+id/totalEarningsTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                     app:layout_constraintStart_toStartOf="@+id/textView11"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-                <TextView
+                <ibrahim.example.stocklogger.views.PriceTextView
                     android:id="@+id/activeStocksTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                     app:layout_constraintStart_toStartOf="@+id/textView15"
                     app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-                <TextView
+                <ibrahim.example.stocklogger.views.PriceTextView
                     android:id="@+id/soldStocksTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
