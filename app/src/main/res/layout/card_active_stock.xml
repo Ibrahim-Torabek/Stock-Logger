@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/layout_margin"
-    app:cardBackgroundColor="@color/purple_200"
+    app:cardBackgroundColor="@color/design_default_color_secondary"
     app:cardCornerRadius="@dimen/layout_margin"
     app:cardUseCompatPadding="true">
 
@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="@+id/textView14"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-            <TextView
+            <ibrahim.example.stocklogger.views.PriceTextView
                 android:id="@+id/soldEarningTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
