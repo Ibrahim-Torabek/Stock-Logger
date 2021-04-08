@@ -1,6 +1,7 @@
 package ibrahim.example.stocklogger.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,6 +111,18 @@ public class MainFragment extends Fragment {
         db.close();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Double usdRating = Double.parseDouble(sp.getString("edit_text_preference_1","1.25"));
+
+        Log.d("SETTINGS",usdRating.toString());
+        System.out.println(usdRating.toString());
+
+        super.onResume();
     }
 
     public static void refreshDashboard(){
