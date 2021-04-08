@@ -5,9 +5,23 @@
 
         <EditTextPreference
             android:defaultValue="1.26"
-            android:key="edit_text_preference_1"
+            android:key="isUSD"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Edit text preference" />
+            android:summary="Enter Current US Dollar's Rating"
+            android:title="Current USD Rating" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Investing">
+
+        <EditTextPreference
+            android:key="investing_amount"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="You can enter your investog amount here.\nMain page can display your total amount."
+            android:title="Investing Amount" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Text Size">
+
+        <SeekBarPreference />
     </PreferenceCategory>
 </PreferenceScreen>

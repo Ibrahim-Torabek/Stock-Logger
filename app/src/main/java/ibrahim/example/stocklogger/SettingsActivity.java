@@ -36,31 +36,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onPostResume() {
-
-        Log.d("SETTINGS","PostResume");
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Double usdRating = Double.parseDouble(preferences.getString("edit_text_preference_1","1.25"));
-
-        Log.d("SETTINGS",usdRating.toString());
-        System.out.println(usdRating.toString());
-        super.onPostResume();
-    }
-
-    @Override
-    protected void onResume() {
-
-        Log.d("SETTINGS","Resume");
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Double usdRating = Double.parseDouble(preferences.getString("edit_text_preference_1","1.25"));
-
-        Log.d("SETTINGS",usdRating.toString());
-        System.out.println(usdRating.toString());
-        super.onResume();
-    }
 
     @Override
     protected void onUserLeaveHint() {
