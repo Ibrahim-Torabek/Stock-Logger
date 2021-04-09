@@ -1,6 +1,7 @@
 package ibrahim.example.stocklogger.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +48,9 @@ public class MainFragment extends Fragment {
 
     private static View view;
     private static Context context;
+
+
+    private TextView totalStocksTextView;
 
     public MainFragment() {
         // Required empty public constructor
@@ -110,6 +116,23 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        StockDatabase db = new StockDatabase(getContext());
+
+        ArrayList<Stock> stocks = db.getAllStocks();
+
+        RecyclerView stockRecyclerView = view.findViewById(R.id.stocksRecyclerView);
+
+        StocksRecyclerAdapter adapter = new StocksRecyclerAdapter(stocks, getContext());
+        stockRecyclerView.setAdapter(adapter);
+        stockRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        db.close();
+
+        super.onResume();
+    }
+
     public static void refreshDashboard(){
         int totalQuantity = 0;
         double totalActiveEarning = 0;
@@ -121,6 +144,7 @@ public class MainFragment extends Fragment {
         PriceTextView activeStocksTextView = view.findViewById(R.id.activeStocksTextView);
         PriceTextView soldStocksTextView = view.findViewById(R.id.soldStocksTextView);
         PriceTextView totalEarningsTextView = view.findViewById(R.id.totalEarningsTextView);
+
 
         // Calculate Total stocks in holding
         StockDatabase db = new StockDatabase(context);
@@ -148,10 +172,8 @@ public class MainFragment extends Fragment {
         totalEarning = totalActiveEarning + totalSoldEarning;
         totalEarningsTextView.setText(String.format("$%.02f", totalEarning));
 
-
-
-
         db.close();
 
     }
+
 }

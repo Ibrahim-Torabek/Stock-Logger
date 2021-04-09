@@ -2,11 +2,13 @@ package ibrahim.example.stocklogger.fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -130,9 +132,16 @@ public class SellStockFragment extends Fragment  {
                     }
 
                     if(!error){
+
                         double soldPrice = Double.parseDouble(soldPriceEditText.getText().toString());
                         double worth = stock.getWorth();
-                        double rating = stock.isUSD() ? 1.26 : 1;
+                        double rating = 1;
+
+                        if(stock.isUSD()){
+                            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+                            rating = Double.parseDouble(sp.getString("isUSD","1.26"));
+                        }
+
                         int quanity = Integer.parseInt(soldQuantityEditText.getText().toString());
 
                         double earned = (soldPrice - worth) * quanity * rating;

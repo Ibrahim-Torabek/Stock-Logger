@@ -1,9 +1,11 @@
 package ibrahim.example.stocklogger.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -149,6 +151,11 @@ public class AddStockFragment extends Fragment {
 
                 // If no any errors
                 if(!error){
+                    double tradingFee = 6.95;
+
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    tradingFee = Double.parseDouble(sharedPreferences.getString("tradingFee", "6.95"));
+
                     StockDatabase db = new StockDatabase(getContext());
                     ActiveStock activeStock = new ActiveStock(
                             symbolEdit.getText().toString(),
@@ -161,8 +168,9 @@ public class AddStockFragment extends Fragment {
                     int stockId = db.getStockId(symbolEdit.getText().toString());
 
 
+                    // There is no related stock in stock table
                     if(stockId == -1){
-                        double worth = (activeStock.getPrice() * activeStock.getQuantity()+2*6.95) / activeStock.getQuantity();
+                        double worth = (activeStock.getPrice() * activeStock.getQuantity()+2*tradingFee) / activeStock.getQuantity();
                         Stock stock = new Stock(
                                 symbolEdit.getText().toString(),
                                 companyNameEdit.getText().toString(),
@@ -174,7 +182,7 @@ public class AddStockFragment extends Fragment {
                             stock.setUSD(true);
                         stockId = db.addStock(stock);
                     } else {
-                        double worth = (activeStock.getPrice() * activeStock.getQuantity()+ 6.95) / activeStock.getQuantity();
+                        double worth = (activeStock.getPrice() * activeStock.getQuantity()+ tradingFee) / activeStock.getQuantity();
                         Stock stock = db.getStock(stockId);
                         int totalQuantity = stock.getQuantity() + activeStock.getQuantity();
                         double totalWorth = (stock.getWorth() * stock.getQuantity() + worth * activeStock.getQuantity()) / totalQuantity;

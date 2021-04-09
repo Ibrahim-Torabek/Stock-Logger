@@ -1,7 +1,9 @@
 package ibrahim.example.stocklogger;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.DatePicker;
@@ -10,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -64,6 +67,22 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_settings:
+                Intent i = new Intent(
+                        MainActivity.this, SettingsActivity.class
+                );
+                startActivity(i);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -80,4 +99,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         String currentDateString = DateFormat.getDateInstance().format(c.getTime());
         SellStockFragment.calendarTextDate.setText(DateFormat.getDateInstance().format(c.getTime()));
     }
+
+
 }
