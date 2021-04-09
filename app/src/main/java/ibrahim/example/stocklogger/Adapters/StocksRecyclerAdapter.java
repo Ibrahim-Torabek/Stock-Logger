@@ -8,6 +8,7 @@ package ibrahim.example.stocklogger.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -138,6 +140,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         return stocks.size();
     }
 
+
     class StockCustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView symbolTextView;
@@ -162,6 +165,15 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             activeStockLinearLayout = itemView.findViewById(R.id.activeStockLinearLayout);
             addStockImageView = itemView.findViewById(R.id.addStockImageView);
             removeStockImageView = itemView.findViewById(R.id.removeStockImageView);
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            float textSize = sharedPreferences.getInt("text_size",30);
+
+            symbolTextView.setTextSize(textSize);
+            currencyTextView.setTextSize(textSize);
+            earningTextView.setTextSize(textSize);
+            recentPriceTextView.setTextSize(textSize);
+            quantityTextView.setTextSize(textSize);
 
             itemView.setOnClickListener(this);
 

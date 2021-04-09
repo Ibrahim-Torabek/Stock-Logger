@@ -49,6 +49,9 @@ public class MainFragment extends Fragment {
     private static View view;
     private static Context context;
 
+
+    private TextView totalStocksTextView;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -115,12 +118,17 @@ public class MainFragment extends Fragment {
 
     @Override
     public void onResume() {
+        StockDatabase db = new StockDatabase(getContext());
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
-        Double usdRating = Double.parseDouble(sp.getString("edit_text_preference_1","1.25"));
+        ArrayList<Stock> stocks = db.getAllStocks();
 
-        Log.d("SETTINGS",usdRating.toString());
-        System.out.println(usdRating.toString());
+        RecyclerView stockRecyclerView = view.findViewById(R.id.stocksRecyclerView);
+
+        StocksRecyclerAdapter adapter = new StocksRecyclerAdapter(stocks, getContext());
+        stockRecyclerView.setAdapter(adapter);
+        stockRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        db.close();
 
         super.onResume();
     }
@@ -136,6 +144,7 @@ public class MainFragment extends Fragment {
         PriceTextView activeStocksTextView = view.findViewById(R.id.activeStocksTextView);
         PriceTextView soldStocksTextView = view.findViewById(R.id.soldStocksTextView);
         PriceTextView totalEarningsTextView = view.findViewById(R.id.totalEarningsTextView);
+
 
         // Calculate Total stocks in holding
         StockDatabase db = new StockDatabase(context);
@@ -163,10 +172,8 @@ public class MainFragment extends Fragment {
         totalEarning = totalActiveEarning + totalSoldEarning;
         totalEarningsTextView.setText(String.format("$%.02f", totalEarning));
 
-
-
-
         db.close();
 
     }
+
 }

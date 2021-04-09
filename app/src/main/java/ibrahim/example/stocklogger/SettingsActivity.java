@@ -24,11 +24,11 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new MysettingsFragment())
+                .replace(android.R.id.content, new MySettingsFragment())
                 .commit();
     }
 
-    public static class MysettingsFragment extends PreferenceFragment{
+    public static class MySettingsFragment extends PreferenceFragment{
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
