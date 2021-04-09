@@ -15,4 +15,13 @@
             android:title="@string/menu_sold" />
 
     </group>
+    <group android:id="@+id/group1">
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/information"
+            android:title="@string/menu_about" />
+
+
+    </group>
 </menu>
