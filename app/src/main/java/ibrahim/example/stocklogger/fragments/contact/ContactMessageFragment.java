@@ -4,9 +4,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import ibrahim.example.stocklogger.R;
 
@@ -61,6 +66,23 @@ public class ContactMessageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_message, container, false);
+        View view = inflater.inflate(R.layout.fragment_contact_message, container, false);
+
+        Spinner smsSpinner = view.findViewById(R.id.smsSpinner);
+        ArrayAdapter<CharSequence> topicAdapter = ArrayAdapter.createFromResource(getContext(),R.array.smsTitles, android.R.layout.simple_spinner_item);
+        topicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        smsSpinner.setAdapter(topicAdapter);
+
+
+        Button smsButton = view.findViewById(R.id.smsButton);
+        smsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String topic = smsSpinner.getSelectedItem().toString();
+                Log.d("SPINNER", topic);
+            }
+        });
+
+        return view;
     }
 }
