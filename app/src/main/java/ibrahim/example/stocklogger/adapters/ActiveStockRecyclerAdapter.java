@@ -1,4 +1,4 @@
-package ibrahim.example.stocklogger.Adapters;
+package ibrahim.example.stocklogger.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

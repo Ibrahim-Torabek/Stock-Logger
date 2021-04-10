@@ -2,7 +2,6 @@ package ibrahim.example.stocklogger.fragments;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-import ibrahim.example.stocklogger.Adapters.StocksRecyclerAdapter;
+import ibrahim.example.stocklogger.adapters.StocksRecyclerAdapter;
 import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.SoldStock;

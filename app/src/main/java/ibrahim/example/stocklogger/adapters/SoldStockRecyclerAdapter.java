@@ -1,4 +1,4 @@
-package ibrahim.example.stocklogger.Adapters;
+package ibrahim.example.stocklogger.adapters;
 // TODO: Complete Java Doc
 
 import android.content.Context;

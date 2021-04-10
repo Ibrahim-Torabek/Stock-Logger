@@ -12,12 +12,10 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import ibrahim.example.stocklogger.Adapters.SoldStockRecyclerAdapter;
-import ibrahim.example.stocklogger.Adapters.StocksRecyclerAdapter;
+import ibrahim.example.stocklogger.adapters.SoldStockRecyclerAdapter;
 import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.SoldStock;
-import ibrahim.example.stocklogger.pojos.Stock;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_main,
                 R.id.nav_sold,
-                R.id.nav_about)
+                R.id.nav_about,
+                R.id.nav_contact)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

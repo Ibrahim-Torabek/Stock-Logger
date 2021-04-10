@@ -112,4 +112,16 @@
     <string name="add_text">ADD</string>
     <string name="recent_price_text">Recent Price</string>
     <string name="erning_text">Erning</string>
+    <string name="contact_phone">2263401234</string>
+
+<!--    TODO: Add contact topics here-->
+    <string-array name="smsTitles">
+        <item>Title 1</item>
+        <item>Title 2</item>
+        <item>Title 3</item>
+        <item>Title 4</item>
+    </string-array>
+
+    <string name="text_email_address">wusiman.yibulayin01@stclairconnect.ca</string>
+    <string name="text_sms_number">12263401234</string>
 </resources>
