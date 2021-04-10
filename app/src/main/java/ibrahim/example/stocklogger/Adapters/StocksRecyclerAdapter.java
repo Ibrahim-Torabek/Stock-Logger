@@ -5,7 +5,7 @@ package ibrahim.example.stocklogger.Adapters;
  *  - Complete JavaDoc
  */
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -24,6 +24,8 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.R;
@@ -33,6 +35,9 @@ import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 import ibrahim.example.stocklogger.views.PriceTextView;
+
+import static android.app.AlertDialog.THEME_DEVICE_DEFAULT_DARK;
+
 
 /**
  * <h1>App for Stock Logger</h1>
@@ -106,7 +111,8 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             @Override
             public void onClick(View view) {
                 String symbol = stock.getSymbol();
-                new AlertDialog.Builder(context)
+                new AlertDialog.Builder(context,THEME_DEVICE_DEFAULT_DARK)
+//                new MaterialAlertDialogBuilder(context)
                         .setTitle(stock.getSymbol())
                         .setMessage("Did you sell all stocks of " + symbol + "?")
                         .setIcon(android.R.drawable.ic_dialog_info)

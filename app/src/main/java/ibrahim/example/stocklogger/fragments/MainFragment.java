@@ -1,5 +1,6 @@
 package ibrahim.example.stocklogger.fragments;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,8 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.preference.PreferenceManager;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +22,7 @@ import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.Adapters.StocksRecyclerAdapter;
 import ibrahim.example.stocklogger.R;
-import ibrahim.example.stocklogger.api.StockApiRequest;
-import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
-import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.SoldStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 import ibrahim.example.stocklogger.views.PriceTextView;
