@@ -63,7 +63,7 @@
 
 
     <style name="AlertDialogTheme.Center" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="colorSurface">#212121</item>
+        <item name="colorSurface">@color/purple_700</item>
         <item name="materialAlertDialogTitlePanelStyle">@style/TitlePaneStyleCenter</item>
         <item name="materialAlertDialogTitleTextStyle">@style/TitleTextStyleCenter</item>
         <item name="materialAlertDialogTitleIconStyle">@style/TitleIconStyleCenter</item>
@@ -90,6 +90,6 @@
         <item name="android:textSize">14sp</item>
     </style>
     <style name="ButtonBarStyle">
-        <item name="android:background">#000000</item>
+        <item name="android:background">@color/black</item>
     </style>
 </resources>

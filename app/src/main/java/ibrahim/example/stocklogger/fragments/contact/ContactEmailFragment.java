@@ -1,28 +1,21 @@
-package ibrahim.example.stocklogger.fragments;
+package ibrahim.example.stocklogger.fragments.contact;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
-import ibrahim.example.stocklogger.adapters.SoldStockRecyclerAdapter;
 import ibrahim.example.stocklogger.R;
-import ibrahim.example.stocklogger.databases.StockDatabase;
-import ibrahim.example.stocklogger.pojos.SoldStock;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SoldStockFragment#newInstance} factory method to
+ * Use the {@link ContactEmailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SoldStockFragment extends Fragment {
+public class ContactEmailFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,7 +26,7 @@ public class SoldStockFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SoldStockFragment() {
+    public ContactEmailFragment() {
         // Required empty public constructor
     }
 
@@ -43,11 +36,11 @@ public class SoldStockFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SoldStockFragment.
+     * @return A new instance of fragment ContactEmailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SoldStockFragment newInstance(String param1, String param2) {
-        SoldStockFragment fragment = new SoldStockFragment();
+    public static ContactEmailFragment newInstance(String param1, String param2) {
+        ContactEmailFragment fragment = new ContactEmailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,21 +61,6 @@ public class SoldStockFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sold_stock, container, false);
-
-        StockDatabase db = new StockDatabase(getContext());
-
-        ArrayList<SoldStock> stocks = db.getAllSoldStocks();
-
-        RecyclerView soldStockRecyclerView = view.findViewById(R.id.soldStockRecyclerView);
-
-        SoldStockRecyclerAdapter adapter = new SoldStockRecyclerAdapter(stocks, getContext());
-        soldStockRecyclerView.setAdapter(adapter);
-        soldStockRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        db.close();
-
-
-        return view;
+        return inflater.inflate(R.layout.fragment_contact_email, container, false);
     }
 }

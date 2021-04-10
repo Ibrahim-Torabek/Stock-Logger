@@ -21,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-import ibrahim.example.stocklogger.Adapters.SymbolAutoCompleteAdapter;
+import ibrahim.example.stocklogger.adapters.SymbolAutoCompleteAdapter;
 import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.databases.StockDatabase;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
