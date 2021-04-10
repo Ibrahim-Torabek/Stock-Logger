@@ -1,12 +1,20 @@
 package ibrahim.example.stocklogger.fragments.contact;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import ibrahim.example.stocklogger.R;
 
@@ -61,6 +69,41 @@ public class ContactEmailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_email, container, false);
+        View view =  inflater.inflate(R.layout.fragment_contact_email, container, false);
+
+
+        Spinner emailSpinner = view.findViewById(R.id.emailSpinner);
+        ArrayAdapter<CharSequence> topicAdapter = ArrayAdapter.createFromResource(getContext(),R.array.smsTitles, android.R.layout.simple_spinner_item);
+        topicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        emailSpinner.setAdapter(topicAdapter);
+
+
+        Button emailButton = view.findViewById(R.id.emailButton);
+        emailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String topic = emailSpinner.getSelectedItem().toString();
+                Log.d("SPINNER", topic);
+
+                Intent i = new Intent(Intent.ACTION_SENDTO);
+                Uri email = Uri.parse("mailto:");
+                String[] emailAddress = {getResources().getString(R.string.text_email_address)};
+
+                i.setData(email);
+                i.putExtra(Intent.EXTRA_EMAIL,emailAddress);
+                i.putExtra(Intent.EXTRA_SUBJECT, topic);
+
+
+                if(i.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(i);
+                } else {
+                    startActivity(i);
+                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content),"Cannot send an email", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        });
+
+        return view;
     }
 }

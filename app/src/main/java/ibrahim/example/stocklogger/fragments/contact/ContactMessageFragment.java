@@ -1,5 +1,7 @@
 package ibrahim.example.stocklogger.fragments.contact;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import ibrahim.example.stocklogger.R;
 
@@ -79,7 +83,20 @@ public class ContactMessageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String topic = smsSpinner.getSelectedItem().toString();
-                Log.d("SPINNER", topic);
+
+                Intent i = new Intent(Intent.ACTION_SENDTO);
+                Uri sms = Uri.parse("smsto:");
+                i.setData(sms);
+                i.putExtra("address", getResources().getString(R.string.text_sms_number));
+                i.putExtra("sms_body", "Topic: " + topic + "\n");
+
+                if(i.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(i);
+                } else {
+                    startActivity(i);
+                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content),"Cannot send an email", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         });
 
