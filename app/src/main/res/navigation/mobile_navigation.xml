@@ -56,4 +56,9 @@
         android:name="ibrahim.example.stocklogger.fragments.contact.ContactEmailFragment"
         android:label="fragment_contact_email"
         tools:layout="@layout/fragment_contact_email" />
+    <fragment
+        android:id="@+id/nav_credits"
+        android:name="ibrahim.example.stocklogger.fragments.CreditsFragment"
+        android:label="Credits"
+        tools:layout="@layout/fragment_credits" />
 </navigation>
