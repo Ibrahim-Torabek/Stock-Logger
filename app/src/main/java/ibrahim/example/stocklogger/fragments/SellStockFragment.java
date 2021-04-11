@@ -142,9 +142,9 @@ public class SellStockFragment extends Fragment  {
                             rating = Double.parseDouble(sp.getString("isUSD","1.26"));
                         }
 
-                        int quanity = Integer.parseInt(soldQuantityEditText.getText().toString());
+                        int quantity = Integer.parseInt(soldQuantityEditText.getText().toString());
 
-                        double earned = (soldPrice - worth) * quanity * rating;
+                        double earned = (soldPrice - worth) * quantity * rating;
 
                         StockDatabase db = new StockDatabase(getContext());
 

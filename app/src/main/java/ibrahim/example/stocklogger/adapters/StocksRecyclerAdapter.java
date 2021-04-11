@@ -95,6 +95,28 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         holder.quantityTextView.setText(String.valueOf(quantity));
         holder.earningTextView.setText(String.format("$%.2f", earning));
 
+        holder.acgiveCardDeleteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MaterialAlertDialogBuilder(context)
+                        .setTitle(stock.getSymbol())
+                        .setMessage("Do you want to delete all transaction records of " + stock.getSymbol() + "?")
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                StockDatabase db = new StockDatabase(context);
+                                db.deleteStock(stock.getId());
+                                db.close();
+                                stocks.remove(position);
+                                notifyItemRemoved(position);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
         if(earning > 0){
             holder.earningTextView.setTextColor(Color.BLUE);
         }
@@ -157,6 +179,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         protected TextView quantityTextView;
         protected ImageView addStockImageView;
         protected ImageView removeStockImageView;
+        protected ImageView acgiveCardDeleteImage;
 
         protected LinearLayout activeStockLinearLayout;
 
@@ -172,6 +195,8 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             activeStockLinearLayout = itemView.findViewById(R.id.activeStockLinearLayout);
             addStockImageView = itemView.findViewById(R.id.addStockImageView);
             removeStockImageView = itemView.findViewById(R.id.removeStockImageView);
+            acgiveCardDeleteImage = itemView.findViewById(R.id.acgiveCardDeleteImage);
+
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             float textSize = sharedPreferences.getInt("text_size",30);

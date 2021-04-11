@@ -2,10 +2,12 @@ package ibrahim.example.stocklogger.fragments;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +51,7 @@ public class MainFragment extends Fragment {
 
 
     private TextView totalStocksTextView;
+    private static Double investment = 0.0;
 
     public MainFragment() {
         // Required empty public constructor
@@ -96,6 +99,9 @@ public class MainFragment extends Fragment {
             }
         });
 
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        investment = Double.parseDouble(sharedPreferences.getString("investing_amount","0.0"));
         refreshDashboard();
 
 
@@ -125,7 +131,9 @@ public class MainFragment extends Fragment {
         StocksRecyclerAdapter adapter = new StocksRecyclerAdapter(stocks, getContext());
         stockRecyclerView.setAdapter(adapter);
         stockRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        investment = Double.parseDouble(sharedPreferences.getString("investing_amount","0.0"));
+        refreshDashboard();
         db.close();
 
         super.onResume();
@@ -142,6 +150,8 @@ public class MainFragment extends Fragment {
         PriceTextView activeStocksTextView = view.findViewById(R.id.activeStocksTextView);
         PriceTextView soldStocksTextView = view.findViewById(R.id.soldStocksTextView);
         PriceTextView totalEarningsTextView = view.findViewById(R.id.totalEarningsTextView);
+        TextView balanceTitleTextView = view.findViewById(R.id.balanceTitleTextView);
+        TextView balanceTextView = view.findViewById(R.id.balanceTextView);
 
 
         // Calculate Total stocks in holding
@@ -169,6 +179,15 @@ public class MainFragment extends Fragment {
 
         totalEarning = totalActiveEarning + totalSoldEarning;
         totalEarningsTextView.setText(String.format("$%.02f", totalEarning));
+        balanceTextView.setText(String.valueOf(investment + totalEarning));
+
+        if(investment != 0){
+            balanceTextView.setVisibility(View.VISIBLE);
+            balanceTitleTextView.setVisibility(View.VISIBLE);
+        } else {
+            balanceTitleTextView.setVisibility(View.GONE);
+            balanceTextView.setVisibility(View.GONE);
+        }
 
         db.close();
 
