@@ -69,11 +69,11 @@ public class SoldStockRecyclerAdapter extends RecyclerView.Adapter<SoldStockRecy
         public SoldStockSuctomViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            soldSymbolTextView = itemView.findViewById(R.id.soldSymbolTextView);
+            soldSymbolTextView = itemView.findViewById(R.id.symbolTextView);
             soldCompanyNameTextView = itemView.findViewById(R.id.soldCompanyNameTextView);
-            soldPriceTextView = itemView.findViewById(R.id.soldPriceTextView);
-            soldEarningTextView = itemView.findViewById(R.id.soldEarningTextView);
-            soldDateTextView = itemView.findViewById(R.id.soldDateTextView);
+            soldPriceTextView = itemView.findViewById(R.id.priceTextView);
+            soldEarningTextView = itemView.findViewById(R.id.earningTextView);
+            soldDateTextView = itemView.findViewById(R.id.quantityTextView);
 
         }
     }

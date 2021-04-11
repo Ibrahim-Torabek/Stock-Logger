@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/soldSymbolTextView"
+            android:id="@+id/symbolTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -25,23 +25,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/currencyTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:text="TextView"
-            android:textSize="@dimen/title_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/soldSymbolTextView" />
-
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="?android:attr/listDivider"
-            app:layout_constraintTop_toBottomOf="@+id/soldSymbolTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/symbolTextView" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,13 +43,12 @@
             app:layout_constraintTop_toBottomOf="@id/divider">
 
             <TextView
-                android:id="@+id/soldDateTextView"
+                android:id="@+id/quantityTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/card_text_spacing"
                 android:text="600"
                 android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
+                app:layout_constraintStart_toStartOf="@+id/earningTextView"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
 
             <TextView
@@ -84,14 +73,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <ibrahim.example.stocklogger.views.PriceTextView
-                android:id="@+id/soldEarningTextView"
+                android:id="@+id/earningTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/card_text_spacing"
                 android:text="25.00"
                 android:textAlignment="textStart"
                 android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintStart_toStartOf="@+id/priceTextView"
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
 
             <TextView
@@ -105,20 +93,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <TextView
-                android:id="@+id/soldPriceTextView"
+                android:id="@+id/priceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/card_text_spacing"
+                android:layout_marginStart="8dp"
                 android:text="12.99"
                 android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
 
             <ImageView
                 android:id="@+id/addStockImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/icon_background_color"
@@ -136,6 +123,28 @@
                 app:layout_constraintEnd_toStartOf="@+id/addStockImageView"
                 app:layout_constraintTop_toTopOf="@+id/addStockImageView"
                 app:srcCompat="@drawable/ic_baseline_remove_24" />
+
+            <TextView
+                android:id="@+id/worthTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="12.99"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/worth_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/priceTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -159,6 +168,14 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="@dimen/layout_margin">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_baseline_close_24" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -195,6 +212,24 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/layout_margin" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/deleteImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_close_24" />
+
+        <ImageView
+            android:id="@+id/flagImageView"
+            android:layout_width="@dimen/flag_size"
+            android:layout_height="@dimen/flag_size"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/symbolTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/symbolTextView"
+            app:srcCompat="@drawable/ic_canada" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/soldSymbolTextView"
+            android:id="@+id/symbolTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -45,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@id/divider">
 
             <TextView
-                android:id="@+id/soldDateTextView"
+                android:id="@+id/quantityTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_text_spacing"
@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <ibrahim.example.stocklogger.views.PriceTextView
-                android:id="@+id/soldEarningTextView"
+                android:id="@+id/earningTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_text_spacing"
@@ -99,7 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <TextView
-                android:id="@+id/soldPriceTextView"
+                android:id="@+id/priceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_text_spacing"
@@ -116,8 +116,8 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/soldSymbolTextView"
-            app:layout_constraintTop_toBottomOf="@+id/soldSymbolTextView" />
+            app:layout_constraintStart_toStartOf="@+id/symbolTextView"
+            app:layout_constraintTop_toBottomOf="@+id/symbolTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
