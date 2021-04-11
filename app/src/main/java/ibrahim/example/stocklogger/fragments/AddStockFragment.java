@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -128,23 +130,35 @@ public class AddStockFragment extends Fragment {
 
                 if(symbolEdit.getText().toString().equals("")){
                     error = true;
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .playOn(symbolEdit);
                     Snackbar.make(view, "Symbol Can't be blank", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
 
                 if(companyNameEdit.getText().toString().equals("")){
                     error = true;
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .playOn(companyNameEdit);
                     Snackbar.make(view, "Company Name Can't be blank", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
 
                 if(priceEdit.getText().toString().equals("")){
                     error = true;
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .playOn(priceEdit);
                     Snackbar.make(view, "Price Can't be blank", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
                 if(quantityEdit.getText().toString().equals("")){
                     error = true;
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .playOn(quantityEdit);
                     Snackbar.make(view, "Quantity Can't be blank", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
