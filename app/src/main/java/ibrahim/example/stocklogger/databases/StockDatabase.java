@@ -148,8 +148,18 @@ public class StockDatabase extends SQLiteOpenHelper {
             values.put(COLUMN_IS_USD,1);
 
         db.insert(TABLE_STOCK,null,values);
+
+        // get last stock id
+        db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
+        if(cursor.moveToFirst()){
+            int id = cursor.getInt(0);
+            db.close();
+            return id;
+        }
         db.close();
-        return getLastRowId();
+        return -1;
+        //return getLastRowId();
     }
     public int addActiveStock(ActiveStock stock){
 
@@ -163,6 +173,8 @@ public class StockDatabase extends SQLiteOpenHelper {
         values.put(COLUMN_BOUGHT_DATE,stock.getBoughtDate());
 
         db.insert(TABLE_ACTIVE,null,values);
+
+        // get Last stock id
         db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
         if(cursor.moveToFirst()){
@@ -421,8 +433,4 @@ public class StockDatabase extends SQLiteOpenHelper {
         db.close();
         return -1;
     }
-
-
-
-
 }
