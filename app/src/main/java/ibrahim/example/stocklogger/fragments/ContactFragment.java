@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -81,6 +83,9 @@ public class ContactFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                YoYo.with(Techniques.FlipInX)
+                        .duration(700)
+                        .playOn(titleImage);
                 switch (position){
                     case 0:
                         ContactFragment.titleImage.setImageResource(R.drawable.contact_call);

@@ -23,6 +23,8 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
@@ -60,6 +62,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_active_stock,parent,false);
 
+
         return new StockCustomViewHolder(view);
     }
 
@@ -70,6 +73,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         double worth = stock.getWorth();
         int quantity = stock.getQuantity();
         double earning = (lastPrice - worth) * quantity;
+
 
 
         // request url
