@@ -88,6 +88,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
 
 
         holder.symbolTextView.setText(stock.getSymbol());
+        holder.companyNameTextView.setText(stock.getCompanyName());
         holder.flagImageView.setImageResource(stock.isUSD() ? R.drawable.ic_united_states : R.drawable.ic_canada);
         holder.recentPriceTextView.setText("$" + String.format("%.2f", lastPrice));
         holder.quantityTextView.setText(String.valueOf(quantity));
@@ -180,6 +181,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         protected ImageView deleteImageView;
         protected ImageView flagImageView;
         protected TextView worthTextView;
+        protected TextView companyNameTextView;
 
         protected LinearLayout activeStockLinearLayout;
 
@@ -197,6 +199,7 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             deleteImageView = itemView.findViewById(R.id.deleteImageView);
             flagImageView = itemView.findViewById(R.id.flagImageView);
             worthTextView = itemView.findViewById(R.id.worthTextView);
+            companyNameTextView = itemView.findViewById(R.id.companyNameTextView);
 
             itemView.setOnClickListener(this);
 

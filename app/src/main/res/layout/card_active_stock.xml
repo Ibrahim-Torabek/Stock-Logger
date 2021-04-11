@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="TextView"
             android:textSize="@dimen/title_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,9 +28,9 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="?android:attr/listDivider"
-            app:layout_constraintTop_toBottomOf="@+id/symbolTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/companyNameTextView" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +45,6 @@
                 android:id="@+id/quantityTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="600"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="@+id/earningTextView"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
@@ -76,7 +74,6 @@
                 android:id="@+id/earningTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25.00"
                 android:textAlignment="textStart"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="@+id/priceTextView"
@@ -87,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/erning_text"
+                android:text="@string/earning_text"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -97,7 +94,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="12.99"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -129,7 +125,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="12.99"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -230,6 +225,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/symbolTextView"
             app:srcCompat="@drawable/ic_canada" />
+
+        <TextView
+            android:id="@+id/companyNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/symbolTextView"
+            app:layout_constraintTop_toBottomOf="@+id/symbolTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

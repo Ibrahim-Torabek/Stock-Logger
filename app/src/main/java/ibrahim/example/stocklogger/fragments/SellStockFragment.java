@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DateFormat;
@@ -47,6 +50,8 @@ public class SellStockFragment extends Fragment  {
     private String mParam2;
 
     public static TextView calendarTextDate;
+
+    EditText soldPriceEditText;
 
     public SellStockFragment() {
         // Required empty public constructor
@@ -86,7 +91,7 @@ public class SellStockFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_sell_stock, container, false);
 
         TextView soldNameTextView = view.findViewById(R.id.soldNameTextView);
-        EditText soldPriceEditText = view.findViewById(R.id.soldPriceEditText);
+        soldPriceEditText = view.findViewById(R.id.soldPriceEditText);
         EditText soldQuantityEditText = view.findViewById(R.id.soldQuantityEditText);
         calendarTextDate = view.findViewById(R.id.calendarTextDate);
         Button soldButton = view.findViewById(R.id.soldButton);
@@ -96,6 +101,7 @@ public class SellStockFragment extends Fragment  {
         soldPriceEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                Log.d("TEST_RESPONSE", "Action ID = " + i + "KeyEvent = " + keyEvent);
                 return false;
             }
         });
@@ -127,6 +133,9 @@ public class SellStockFragment extends Fragment  {
 
                     if(soldPriceEditText.getText().toString().equals("")){
                         error = true;
+                        YoYo.with(Techniques.Shake)
+                                .duration(700)
+                                .playOn(soldPriceEditText);
                         Snackbar.make(view, "Sold price can't be blank", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
@@ -161,7 +170,7 @@ public class SellStockFragment extends Fragment  {
                         db.deleteStock(stock.getId());
 
                         db.close();
-                        soldPriceEditText.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
                         Navigation.findNavController(view).popBackStack();
                     }
                 }
@@ -174,5 +183,10 @@ public class SellStockFragment extends Fragment  {
         return view;
     }
 
-
+    @Override
+    public void onDestroyView() {
+        Log.d("FRAGMENT","Destroyed");
+        soldPriceEditText.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        super.onDestroyView();
+    }
 }
