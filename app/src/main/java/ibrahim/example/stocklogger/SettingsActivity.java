@@ -9,6 +9,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AlertDialog;
+
 /**
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>

@@ -75,7 +75,7 @@ public class ContactFragment extends Fragment {
         titleImage = view.findViewById(R.id.imageHead);
 
         ViewPager2 contactViewPager = view.findViewById(R.id.contactViewPager);
-        contactViewPager.setAdapter(new ContactViewPagerAdapter(getActivity()));
+        contactViewPager.setAdapter(new ContactViewPagerAdapter(getActivity(), ContactViewPagerAdapter.PAGE_CONTACT));
         contactViewPager.setPageTransformer(new DepthPageTransformer());
         contactViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

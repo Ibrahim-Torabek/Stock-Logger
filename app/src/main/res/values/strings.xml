@@ -114,7 +114,7 @@
     <string name="erning_text">Erning</string>
     <string name="contact_phone">2263401234</string>
 
-<!--    TODO: Add contact topics here-->
+    <!--    TODO: Add contact topics here-->
     <string-array name="smsTitles">
         <item>Title 1</item>
         <item>Title 2</item>

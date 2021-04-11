@@ -13,19 +13,23 @@
             android:id="@+id/nav_sold"
             android:icon="@drawable/ic_baseline_sell_24"
             android:title="@string/menu_sold" />
-
     </group>
     <group android:id="@+id/group1">
 
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/information"
+            android:icon="@drawable/ic_information"
             android:title="@string/menu_about" />
         <item
             android:id="@+id/nav_contact"
-            android:icon="@drawable/contact"
+            android:icon="@drawable/ic_contact"
             android:title="@string/menu_contact" />
+    </group>
+    <group android:id="@+id/group2">
 
-
+        <item
+            android:id="@+id/nav_credits"
+            android:icon="@drawable/ic_credits"
+            android:title="@string/menu_credits" />
     </group>
 </menu>
