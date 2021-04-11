@@ -15,6 +15,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.adapters.ContactViewPagerAdapter;
+import ibrahim.example.stocklogger.views.DepthPageTransformer;
+import ibrahim.example.stocklogger.views.ZoomOutPageTransformer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,7 +75,7 @@ public class CreditsFragment extends Fragment {
         ViewPager2 creditViewPager = view.findViewById(R.id.creditViewPager);
         creditViewPager.setAdapter(new ContactViewPagerAdapter(getActivity(), ContactViewPagerAdapter.PAGE_CREDITS));
         //contactViewPager.setPageTransformer(new ContactFragment.DepthPageTransformer());
-
+        creditViewPager.setPageTransformer(new ZoomOutPageTransformer());
 
         TabLayout tabLayout = view.findViewById(R.id.creditTabLayout);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
