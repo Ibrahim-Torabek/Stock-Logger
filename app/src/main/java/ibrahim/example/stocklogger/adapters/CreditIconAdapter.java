@@ -15,15 +15,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.fragments.credits.CreditIconFragment;
 import ibrahim.example.stocklogger.pojos.CreditIcon;
 
 /**
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * <h3>This is a recycler view custom adapter to display credits of icons and their resources</h3>
+ *
+ *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 10/04/21
+ * @see RecyclerView.Adapter
+ * @see CreditIconFragment
  */
 public class CreditIconAdapter extends RecyclerView.Adapter<CreditIconAdapter.CreditIconRecyclerHolder> {
     ArrayList<CreditIcon> creditIcons;
@@ -52,6 +58,8 @@ public class CreditIconAdapter extends RecyclerView.Adapter<CreditIconAdapter.Cr
         holder.iconCreditTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // open the source web site of an icon when clicked the source name.
+
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(creditIcon.getIconURL()));
                 //i.setData();
                 context.startActivity(i);

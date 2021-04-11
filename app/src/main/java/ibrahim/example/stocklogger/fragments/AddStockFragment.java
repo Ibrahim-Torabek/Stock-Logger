@@ -211,10 +211,7 @@ public class AddStockFragment extends Fragment {
                     Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     db.close();
-                    symbolEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                    companyNameEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                    priceEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                    quantityEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
                     Navigation.findNavController(view).popBackStack();
                 }
 

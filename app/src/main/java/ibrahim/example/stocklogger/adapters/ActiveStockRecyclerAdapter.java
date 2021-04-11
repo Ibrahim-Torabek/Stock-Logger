@@ -23,9 +23,15 @@ import ibrahim.example.stocklogger.pojos.ActiveStock;
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * <h3>This class is a recycler view custom adapter class</h3>
+ * This class extends RecyclerView.Adapter class\n
+ * It will display all transitions of an active stock.
+ *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 02/04/21
+ * @see RecyclerView.Adapter
+ * @see StocksRecyclerAdapter
  */
 public class ActiveStockRecyclerAdapter extends RecyclerView.Adapter<ActiveStockRecyclerAdapter.ActiveStockRecyclerHolder> {
     private ArrayList<ActiveStock> activeStocks;
