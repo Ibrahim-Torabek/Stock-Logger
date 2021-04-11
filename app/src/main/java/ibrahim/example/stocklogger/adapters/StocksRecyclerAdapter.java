@@ -23,8 +23,6 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
@@ -90,12 +88,13 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
 
 
         holder.symbolTextView.setText(stock.getSymbol());
-        holder.currencyTextView.setText(stock.isUSD() ? "USD" : "CAD");
+        holder.flagImageView.setImageResource(stock.isUSD() ? R.drawable.ic_united_states : R.drawable.ic_canada);
         holder.recentPriceTextView.setText("$" + String.format("%.2f", lastPrice));
         holder.quantityTextView.setText(String.valueOf(quantity));
         holder.earningTextView.setText(String.format("$%.2f", earning));
+        holder.worthTextView.setText(String.format("$%.2f", worth));
 
-        holder.acgiveCardDeleteImage.setOnClickListener(new View.OnClickListener() {
+        holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new MaterialAlertDialogBuilder(context)
@@ -173,13 +172,14 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
     class StockCustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView symbolTextView;
-        protected TextView currencyTextView;
         protected PriceTextView earningTextView;
         protected TextView recentPriceTextView;
         protected TextView quantityTextView;
         protected ImageView addStockImageView;
         protected ImageView removeStockImageView;
-        protected ImageView acgiveCardDeleteImage;
+        protected ImageView deleteImageView;
+        protected ImageView flagImageView;
+        protected TextView worthTextView;
 
         protected LinearLayout activeStockLinearLayout;
 
@@ -187,25 +187,16 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
         public StockCustomViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            symbolTextView = itemView.findViewById(R.id.soldSymbolTextView);
-            currencyTextView = itemView.findViewById(R.id.currencyTextView);
-            earningTextView = itemView.findViewById(R.id.soldEarningTextView);
-            recentPriceTextView = itemView.findViewById(R.id.soldPriceTextView);
-            quantityTextView = itemView.findViewById(R.id.soldDateTextView);
+            symbolTextView = itemView.findViewById(R.id.symbolTextView);
+            earningTextView = itemView.findViewById(R.id.earningTextView);
+            recentPriceTextView = itemView.findViewById(R.id.priceTextView);
+            quantityTextView = itemView.findViewById(R.id.quantityTextView);
             activeStockLinearLayout = itemView.findViewById(R.id.activeStockLinearLayout);
             addStockImageView = itemView.findViewById(R.id.addStockImageView);
             removeStockImageView = itemView.findViewById(R.id.removeStockImageView);
-            acgiveCardDeleteImage = itemView.findViewById(R.id.acgiveCardDeleteImage);
-
-
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            float textSize = sharedPreferences.getInt("text_size",30);
-
-            symbolTextView.setTextSize(textSize);
-            currencyTextView.setTextSize(textSize);
-            earningTextView.setTextSize(textSize);
-            recentPriceTextView.setTextSize(textSize);
-            quantityTextView.setTextSize(textSize);
+            deleteImageView = itemView.findViewById(R.id.deleteImageView);
+            flagImageView = itemView.findViewById(R.id.flagImageView);
+            worthTextView = itemView.findViewById(R.id.worthTextView);
 
             itemView.setOnClickListener(this);
 
