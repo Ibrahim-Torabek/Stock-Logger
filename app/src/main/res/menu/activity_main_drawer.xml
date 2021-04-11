@@ -18,11 +18,11 @@
 
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/information"
+            android:icon="@drawable/ic_information"
             android:title="@string/menu_about" />
         <item
             android:id="@+id/nav_contact"
-            android:icon="@drawable/contact"
+            android:icon="@drawable/ic_contact"
             android:title="@string/menu_contact" />
     </group>
     <group android:id="@+id/group2">

@@ -2,13 +2,19 @@ package ibrahim.example.stocklogger.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
 import ibrahim.example.stocklogger.R;
+import ibrahim.example.stocklogger.adapters.ContactViewPagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +67,41 @@ public class CreditsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_credits, container, false);
+        View view = inflater.inflate(R.layout.fragment_credits, container, false);
+
+
+        ViewPager2 creditViewPager = view.findViewById(R.id.creditViewPager);
+        creditViewPager.setAdapter(new ContactViewPagerAdapter(getActivity(), ContactViewPagerAdapter.PAGE_CREDITS));
+        //contactViewPager.setPageTransformer(new ContactFragment.DepthPageTransformer());
+
+
+        TabLayout tabLayout = view.findViewById(R.id.creditTabLayout);
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
+                tabLayout,
+                creditViewPager,
+                new TabLayoutMediator.TabConfigurationStrategy() {
+                    @Override
+                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        switch (position){
+                            case 0:
+                                tab.setText("Icons");
+
+                                break;
+                            case 1:
+                                tab.setText("Pictures");
+
+                                break;
+                            case 2:
+                                tab.setText("other");
+
+                                break;
+                        }
+                    }
+                }
+        );
+
+        tabLayoutMediator.attach();
+
+        return view;
     }
 }

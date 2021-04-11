@@ -61,4 +61,19 @@
         android:name="ibrahim.example.stocklogger.fragments.CreditsFragment"
         android:label="Credits"
         tools:layout="@layout/fragment_credits" />
+    <fragment
+        android:id="@+id/creditIconFragment"
+        android:name="ibrahim.example.stocklogger.fragments.credits.CreditIconFragment"
+        android:label="Icons"
+        tools:layout="@layout/fragment_credit_icon" />
+    <fragment
+        android:id="@+id/creditPictureFragment"
+        android:name="ibrahim.example.stocklogger.fragments.credits.CreditPictureFragment"
+        android:label="Pictures"
+        tools:layout="@layout/fragment_credit_picture" />
+    <fragment
+        android:id="@+id/creditOtherFragment"
+        android:name="ibrahim.example.stocklogger.fragments.credits.CreditOtherFragment"
+        android:label="Other"
+        tools:layout="@layout/fragment_credit_other" />
 </navigation>

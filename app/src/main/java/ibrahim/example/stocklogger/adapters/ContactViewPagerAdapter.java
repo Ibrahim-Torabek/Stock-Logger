@@ -10,6 +10,9 @@ import ibrahim.example.stocklogger.fragments.ContactFragment;
 import ibrahim.example.stocklogger.fragments.contact.ContactCallFragment;
 import ibrahim.example.stocklogger.fragments.contact.ContactEmailFragment;
 import ibrahim.example.stocklogger.fragments.contact.ContactMessageFragment;
+import ibrahim.example.stocklogger.fragments.credits.CreditIconFragment;
+import ibrahim.example.stocklogger.fragments.credits.CreditOtherFragment;
+import ibrahim.example.stocklogger.fragments.credits.CreditPictureFragment;
 
 /**
  * <h1>App for Stock Logger</h1>
@@ -20,8 +23,16 @@ import ibrahim.example.stocklogger.fragments.contact.ContactMessageFragment;
  * @since 10/04/21
  */
 public class ContactViewPagerAdapter extends FragmentStateAdapter {
-    public ContactViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public static final int PAGE_CONTACT = 1;
+    public static final int PAGE_CREDITS = 2;
+
+    int currentPage;
+
+
+    public ContactViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, int currentPage) {
         super(fragmentActivity);
+
+        this.currentPage = currentPage;
     }
 
     @NonNull
@@ -30,13 +41,13 @@ public class ContactViewPagerAdapter extends FragmentStateAdapter {
         switch (position){
             case 0:
 
-                return  new ContactCallFragment();
+                return currentPage == PAGE_CONTACT ? new ContactCallFragment() : new CreditIconFragment();
             case 1:
 
-                return new ContactMessageFragment();
+                return currentPage == PAGE_CONTACT ? new ContactMessageFragment(): new CreditPictureFragment();
             case 2:
 
-                return new ContactEmailFragment();
+                return currentPage == PAGE_CONTACT ? new ContactEmailFragment(): new CreditOtherFragment();
             default:
                 return null;
         }
