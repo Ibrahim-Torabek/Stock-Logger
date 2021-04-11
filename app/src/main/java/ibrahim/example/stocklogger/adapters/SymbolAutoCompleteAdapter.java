@@ -3,6 +3,7 @@ package ibrahim.example.stocklogger.adapters;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Filter;
 import android.widget.Filterable;
 
@@ -28,14 +29,20 @@ import ibrahim.example.stocklogger.pojos.AutoCompletedStock;
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * <h3>This class is an Array adapter for auto complete the stock symbol</h3>
+ * It will filter relative symbols from entered characters in symbol edit box.
+ * It extends ArrayAdapter and implements Filterable protocol.
+ *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 04/04/21
+ * @see ArrayAdapter
+ * @see Filterable
+ * @see AutoCompleteTextView
  */
 public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterable {
     ArrayList<String> symbols;// = new ArrayList<>();
     public ArrayList<String> companyNames;
-
 
     int resource;
     Context context;
@@ -54,7 +61,7 @@ public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterabl
 
     @Override
     public String getItem(int position) {
-
+        // get selected symbols' position
         return symbols.get(position);
     }
 
@@ -62,16 +69,20 @@ public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterabl
     @Override
     public Filter getFilter() {
 
+        // Perform filtering
         Filter filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
+                // Get filter results.
                 FilterResults results = new FilterResults();
                 if(charSequence != null){
+                    // Generate alphavantage's auto complete api url.
                     String requestUrl = StockApiRequest.URL +
                             "function=" + StockApiRequest.SYMBOL_SEARCH +
                             "&keywords=" + charSequence.toString().toUpperCase() +
                             "&apikey=" + StockApiRequest.APIKEY;
 
+                    // Request an api JSONObject
                     JsonObjectRequest request = new JsonObjectRequest(
                             Request.Method.GET,
                             requestUrl,
@@ -127,6 +138,7 @@ public class SymbolAutoCompleteAdapter extends ArrayAdapter implements Filterabl
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 if(filterResults != null && filterResults.count > 0){
+                    // I moved the following code to onResponse method of JSONRequest.
                     //notifyDataSetChanged();
                 } else {
                     notifyDataSetInvalidated();

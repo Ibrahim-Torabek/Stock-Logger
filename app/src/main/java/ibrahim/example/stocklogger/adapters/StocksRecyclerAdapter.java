@@ -31,6 +31,7 @@ import ibrahim.example.stocklogger.R;
 import ibrahim.example.stocklogger.api.StockApiRequest;
 import ibrahim.example.stocklogger.api.StockSingleton;
 import ibrahim.example.stocklogger.databases.StockDatabase;
+import ibrahim.example.stocklogger.fragments.MainFragment;
 import ibrahim.example.stocklogger.pojos.ActiveStock;
 import ibrahim.example.stocklogger.pojos.Stock;
 import ibrahim.example.stocklogger.views.PriceTextView;
@@ -40,9 +41,17 @@ import ibrahim.example.stocklogger.views.PriceTextView;
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * <h3>This is a recycler view custom adapter class for main fragment</h3>
+ *
+ * It will display on hold stocks in card view and each card view also include
+ * detailed transactions of each stock with ActiveStockRecyclerView.
+ *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 2021-01-27
+ * @see RecyclerView.Adapter
+ * @see MainFragment
+ * @see ActiveStockRecyclerAdapter
  */
 public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAdapter.StockCustomViewHolder> {
     private ArrayList<Stock> stocks;
@@ -89,12 +98,14 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
 
         holder.symbolTextView.setText(stock.getSymbol());
         holder.companyNameTextView.setText(stock.getCompanyName());
+        // determine which flag to display The US or Canada based on isUSD property
         holder.flagImageView.setImageResource(stock.isUSD() ? R.drawable.ic_united_states : R.drawable.ic_canada);
         holder.recentPriceTextView.setText("$" + String.format("%.2f", lastPrice));
         holder.quantityTextView.setText(String.valueOf(quantity));
         holder.earningTextView.setText(String.format("$%.2f", earning));
         holder.worthTextView.setText(String.format("$%.2f", worth));
 
+        // Delete a stock card view
         holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,19 +128,19 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             }
         });
 
-        if(earning > 0){
-            holder.earningTextView.setTextColor(Color.BLUE);
-        }
-
+        // Increase a stock holding number
         holder.addStockImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // set bundle
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("STOCK",stock);
                 Navigation.findNavController(view).navigate(R.id.addStockFragment, bundle);
             }
         });
 
+        // This will mark a stock as sold.
+        // In present, it only mark whole stock as sold.
         holder.removeStockImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,8 +153,11 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                // set bundle
                                 Bundle bundle = new Bundle();
                                 bundle.putParcelable("STOCK",stock);
+
+                                //Navigate to sellStock fragment with bundle.
                                 Navigation.findNavController(view).navigate(R.id.sellStockFragment, bundle);
                             }
                         })
@@ -152,11 +166,13 @@ public class StocksRecyclerAdapter extends RecyclerView.Adapter<StocksRecyclerAd
             }
         });
 
+
         ArrayList<ActiveStock> activeStocks = new ArrayList<>();
         StockDatabase db = new StockDatabase(context);
         activeStocks = db.getAllActiveStocks(stock.getId());
         db.close();
 
+        // Set transactions recycler view to display all transactions from active stock table
         RecyclerView activeStockRecyclerView = holder.itemView.findViewById(R.id.activeStockRecyclerView);
         activeStockRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         activeStockRecyclerView.setAdapter(new ActiveStockRecyclerAdapter(activeStocks, context));
