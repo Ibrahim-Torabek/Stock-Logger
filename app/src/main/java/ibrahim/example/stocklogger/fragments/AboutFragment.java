@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import ibrahim.example.stocklogger.R;
 
 /**
@@ -61,6 +64,17 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false);
+        View view = inflater.inflate(R.layout.fragment_about, container, false);
+
+        YoYo.with(Techniques.FadeInLeft)
+                .duration(700)
+                .playOn(view.findViewById(R.id.futruredImageView));
+
+
+        YoYo.with(Techniques.FadeInRight)
+                .duration(700)
+                .playOn(view.findViewById(R.id.aboutTextView));
+
+        return view;
     }
 }

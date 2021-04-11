@@ -8,7 +8,7 @@
     tools:context=".fragments.AboutFragment">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/futruredImageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -24,7 +24,7 @@
         android:padding="@dimen/layout_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+        app:layout_constraintTop_toBottomOf="@+id/futruredImageView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/aboutTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="When we are trading stocks, we need to calculate profit or loss. Most stock trading software does not calculate the detailed costs. In this app, you just need to log into your bought or sold stocks. You can estimate the selling price by setting your willing profit."
