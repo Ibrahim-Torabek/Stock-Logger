@@ -1,7 +1,6 @@
 package ibrahim.example.stocklogger.fragments;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -15,9 +14,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -50,9 +47,7 @@ public class SellStockFragment extends Fragment  {
     private String mParam1;
     private String mParam2;
 
-    public static TextView calendarTextDate;
-
-    EditText soldPriceEditText;
+    public static TextView soldDateText;
 
     public SellStockFragment() {
         // Required empty public constructor
@@ -92,9 +87,9 @@ public class SellStockFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_sell_stock, container, false);
 
         TextView soldNameTextView = view.findViewById(R.id.soldNameTextView);
-        soldPriceEditText = view.findViewById(R.id.soldPriceEditText);
+        EditText soldPriceEditText = view.findViewById(R.id.soldPriceEditText);
         EditText soldQuantityEditText = view.findViewById(R.id.soldQuantityEditText);
-        calendarTextDate = view.findViewById(R.id.calendarTextDate);
+        soldDateText = view.findViewById(R.id.soldDateText);
         Button soldButton = view.findViewById(R.id.soldButton);
 
         Calendar c = Calendar.getInstance();
@@ -109,10 +104,11 @@ public class SellStockFragment extends Fragment  {
 
 
         // Set current date
-        calendarTextDate.setText(DateFormat.getDateInstance().format(c.getTime()));
-        calendarTextDate.setOnClickListener(new View.OnClickListener() {
+        soldDateText.setText(DateFormat.getDateInstance().format(c.getTime()));
+        soldDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Open Date picker dialog when clicked
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
             }
@@ -171,7 +167,7 @@ public class SellStockFragment extends Fragment  {
                                     stock.getCompanyName(),
                                     soldPrice,
                                     soldQuantity * -1,
-                                    calendarTextDate.getText().toString()
+                                    soldDateText.getText().toString()
                             );
                             int activeStockId = db.addActiveStock(activeStock);
 
@@ -202,7 +198,7 @@ public class SellStockFragment extends Fragment  {
                                             stock.getCompanyName(),
                                             soldPrice,
                                             earned,
-                                            calendarTextDate.getText().toString()
+                                            soldDateText.getText().toString()
                                     )
                             );
 
@@ -216,16 +212,8 @@ public class SellStockFragment extends Fragment  {
             });
         }
 
-
-
-
         return view;
     }
 
-    @Override
-    public void onDestroyView() {
-        Log.d("FRAGMENT","Destroyed");
-        soldPriceEditText.onEditorAction(EditorInfo.IME_ACTION_DONE);
-        super.onDestroyView();
-    }
+
 }

@@ -19,8 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -93,15 +92,17 @@ public class MainFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_main, container, false);
         context = getContext();
 
+        // add a floating button to add a new stock.
         FloatingActionButton addFab = view.findViewById(R.id.addFab);
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Navigate to the AddStockFragment
                 Navigation.findNavController(view).navigate(R.id.addStockFragment);
             }
         });
 
-
+        // Get investing amount from preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         investment = Double.parseDouble(sharedPreferences.getString("investing_amount","0.0"));
         refreshDashboard();
@@ -122,6 +123,9 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Refresh the recycler view when back to the fragment
+     */
     @Override
     public void onResume() {
         StockDatabase db = new StockDatabase(getContext());
@@ -141,6 +145,10 @@ public class MainFragment extends Fragment {
         super.onResume();
     }
 
+    /**
+     * Hide soft keyboard when back to the main fragment
+     * @param savedInstanceState saved Instance
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -149,11 +157,14 @@ public class MainFragment extends Fragment {
         imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 
+    /**
+     * Re calculate and refresh all dash board data
+     */
     public static void refreshDashboard(){
         int totalQuantity = 0;
         double totalActiveEarning = 0;
         double totalSoldEarning = 0;
-        double totalEarning = 0;
+        double totalEarning;
         TextView totalStocksTextView = view.findViewById(R.id.totalStocksTextView);
 
         // Use PriceTextView to show dependent colors
@@ -189,7 +200,7 @@ public class MainFragment extends Fragment {
 
         totalEarning = totalActiveEarning + totalSoldEarning;
         totalEarningsTextView.setText(String.format("$%.02f", totalEarning));
-        balanceTextView.setText(String.valueOf(investment + totalEarning));
+        balanceTextView.setText(String.format("$%.02f", totalEarning + investment));
 
         if(investment != 0){
             balanceTextView.setVisibility(View.VISIBLE);

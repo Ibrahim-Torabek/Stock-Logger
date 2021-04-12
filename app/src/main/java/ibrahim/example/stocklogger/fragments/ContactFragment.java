@@ -77,22 +77,30 @@ public class ContactFragment extends Fragment {
 
         titleImage = view.findViewById(R.id.imageHead);
 
+        // use viewpager2 to display three fragments
         ViewPager2 contactViewPager = view.findViewById(R.id.contactViewPager);
+
+        // set the common viewPager2 adapter to display three contact fragments, and provide PAGE_CONNACT to identify the target fragments
         contactViewPager.setAdapter(new ContactViewPagerAdapter(getActivity(), ContactViewPagerAdapter.PAGE_CONTACT));
+
+        // set Transformer
         contactViewPager.setPageTransformer(new DepthPageTransformer());
         contactViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                // set animation to the head image
                 YoYo.with(Techniques.FlipInX)
                         .duration(700)
                         .playOn(titleImage);
+
+                // set the head image that placed above the viewpager2 when the pager changed
+                // three different images for each page.
                 switch (position){
                     case 0:
                         ContactFragment.titleImage.setImageResource(R.drawable.contact_call);
                         break;
                     case 1:
-
                         ContactFragment.titleImage.setImageResource(R.drawable.contact_sms);
                         break;
                     case 2:
@@ -101,6 +109,7 @@ public class ContactFragment extends Fragment {
             }
         });
 
+
         TabLayout tabLayout = view.findViewById(R.id.tabLayout);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 tabLayout,
@@ -108,6 +117,7 @@ public class ContactFragment extends Fragment {
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        // Display tab title and icon for each tab.
                         switch (position){
                             case 0:
                                 tab.setText("Call");

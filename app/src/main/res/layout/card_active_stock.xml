@@ -105,6 +105,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/icon_background_color"
+                android:contentDescription="@string/increase_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView16"
@@ -116,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/icon_background_color"
+                android:contentDescription="@string/sold_stock_text"
                 app:layout_constraintEnd_toStartOf="@+id/addStockImageView"
                 app:layout_constraintTop_toTopOf="@+id/addStockImageView"
                 app:srcCompat="@drawable/ic_baseline_remove_24" />
@@ -169,6 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/delete_text"
                     android:visibility="invisible"
                     app:srcCompat="@drawable/ic_baseline_close_24" />
 
@@ -177,17 +180,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Date"
+                    android:text="@string/date_text"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
                     android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="Quantity"
+                    android:text="@string/quantity"
+                    android:textAlignment="textEnd"
                     android:textSize="18sp" />
 
                 <TextView
@@ -195,8 +197,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="Price"
+                    android:text="@string/price"
+                    android:textAlignment="textEnd"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -212,6 +214,7 @@
             android:id="@+id/deleteImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/delete_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_close_24" />
@@ -222,6 +225,7 @@
             android:layout_height="@dimen/flag_size"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
+            android:contentDescription="@string/flag_text"
             app:layout_constraintBottom_toBottomOf="@+id/companyNameTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/symbolTextView"

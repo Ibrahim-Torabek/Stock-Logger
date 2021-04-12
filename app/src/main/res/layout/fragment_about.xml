@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:contentDescription="Featured Image"
+        android:contentDescription="@string/featured_image"
         android:src="@drawable/featured"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
                 android:id="@+id/aboutTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="When we are trading stocks, we need to calculate profit or loss. Most stock trading software does not calculate the detailed costs. In this app, you just need to log into your bought or sold stocks. You can estimate the selling price by setting your willing profit."
+                android:text="@string/about_text"
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>

@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import ibrahim.example.stocklogger.fragments.AddStockFragment;
 import ibrahim.example.stocklogger.fragments.SellStockFragment;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -74,13 +75,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
-            case R.id.action_settings:
+        if(id == R.id.action_settings){
                 Intent i = new Intent(
                         MainActivity.this, SettingsActivity.class
                 );
                 startActivity(i);
-                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -93,6 +92,16 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 || super.onSupportNavigateUp();
     }
 
+    /**
+     * Date picker listner, set selected date to the relative text boxes.
+     *
+     * @param datePicker date picker
+     * @param i year
+     * @param i1 month
+     * @param i2 day
+     * @see DatePicker
+     * @see SellStockFragment
+     */
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         Calendar c = Calendar.getInstance();
@@ -100,8 +109,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         c.set(Calendar.MONTH, i1);
         c.set(Calendar.DAY_OF_MONTH, i2);
 
-        String currentDateString = DateFormat.getDateInstance().format(c.getTime());
-        SellStockFragment.calendarTextDate.setText(DateFormat.getDateInstance().format(c.getTime()));
+        // check if the calendar text date in SellStockFragment is active.
+        if(SellStockFragment.soldDateText != null)
+            SellStockFragment.soldDateText.setText(DateFormat.getDateInstance().format(c.getTime()));
+
+        if(AddStockFragment.boughtDateText != null)
+            AddStockFragment.boughtDateText.setText(DateFormat.getDateInstance().format(c.getTime()));
     }
 
 

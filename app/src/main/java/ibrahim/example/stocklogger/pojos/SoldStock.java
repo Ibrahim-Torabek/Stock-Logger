@@ -10,10 +10,7 @@ import java.util.Date;
  * <h2>Android project of MAD405 Course</h2>
  *
  * This is a class for sold stocks. It stores information of stock
- * which user sold. We will pass the object of this class among fragments,
- * so we need to implement Parcelable interface.
- *
- * @see Parcelable
+ * which user sold.
  *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
@@ -21,7 +18,7 @@ import java.util.Date;
  */
 
 
-public class SoldStock implements Parcelable {
+public class SoldStock{
     private int id;
     private String symbol;
     private String companyName;
@@ -57,17 +54,6 @@ public class SoldStock implements Parcelable {
         earning = in.readDouble();
     }
 
-    public static final Creator<SoldStock> CREATOR = new Creator<SoldStock>() {
-        @Override
-        public SoldStock createFromParcel(Parcel in) {
-            return new SoldStock(in);
-        }
-
-        @Override
-        public SoldStock[] newArray(int size) {
-            return new SoldStock[size];
-        }
-    };
 
     public int getId() {
         return id;
@@ -122,17 +108,4 @@ public class SoldStock implements Parcelable {
         return companyName;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
-        parcel.writeString(symbol);
-        parcel.writeString(companyName);
-        parcel.writeDouble(soldPrice);
-        parcel.writeDouble(earning);
-    }
 }

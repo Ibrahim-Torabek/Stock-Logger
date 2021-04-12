@@ -72,6 +72,7 @@ public class SoldStockFragment extends Fragment {
 
         StockDatabase db = new StockDatabase(getContext());
 
+        // List all sold stocks in recycler view
         ArrayList<SoldStock> stocks = db.getAllSoldStocks();
 
         RecyclerView soldStockRecyclerView = view.findViewById(R.id.soldStockRecyclerView);

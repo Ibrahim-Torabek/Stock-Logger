@@ -15,9 +15,13 @@ import androidx.appcompat.app.AlertDialog;
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * <h3> This is a setting activity to display settings preferences.</h3>
+ *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 07/04/21
+ *
+ * @see PreferenceFragment
  */
 public class SettingsActivity extends AppCompatActivity {
 

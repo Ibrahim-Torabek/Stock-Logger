@@ -3,6 +3,7 @@ package ibrahim.example.stocklogger.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
@@ -16,12 +17,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import ibrahim.example.stocklogger.adapters.SymbolAutoCompleteAdapter;
 import ibrahim.example.stocklogger.R;
@@ -46,11 +50,11 @@ public class AddStockFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private String[] symbols;
+    public static TextView boughtDateText;
+
+    // Arraylist of auto completed stocks
     public static ArrayList<AutoCompletedStock> autoCompletedStocks = new ArrayList<>();
 
-    // Declare private to use the stock object in different methods.
-    private Stock stock;
 
     public AddStockFragment() {
         // Required empty public constructor
@@ -89,28 +93,44 @@ public class AddStockFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_stock, container, false);
 
-
         AutoCompleteTextView symbolEdit = view.findViewById(R.id.symbolEdit);
         EditText companyNameEdit = view.findViewById(R.id.companyNameEdit);
         EditText priceEdit = view.findViewById(R.id.priceEdit);
         EditText quantityEdit = view.findViewById(R.id.quantityEdit);
+        boughtDateText = view.findViewById(R.id.boughtDateText);
         Switch isUSD = view.findViewById(R.id.isUSD);
         Button addButton = view.findViewById(R.id.addButton);
 
+        //Set autocomplete adapter
         symbolEdit.setAdapter(new SymbolAutoCompleteAdapter(getContext(), android.R.layout.simple_list_item_1));
 
         symbolEdit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // returned auto completed array list.
                 if(autoCompletedStocks != null){
+                    // get company name and stock country and set them into views
                     companyNameEdit.setText(autoCompletedStocks.get(i).getCompanyName());
                     isUSD.setChecked(autoCompletedStocks.get(i).isUSD());
                 }
             }
         });
 
+        Calendar c = Calendar.getInstance();
+        boughtDateText.setText(DateFormat.getDateInstance().format(c.getTime()));
+        boughtDateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open Date picker dialog when clicked
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getFragmentManager(), "date picker");
+            }
+        });
+
+        // If the fragment has bundled argument, it means the user clicked the increase stock button.
+        // get information from the given argument
         if( getArguments() != null){
-            stock = getArguments().getParcelable("STOCK");
+            Stock stock = getArguments().getParcelable("STOCK");
 
             symbolEdit.setEnabled(false);
             symbolEdit.setText(stock.getSymbol());
@@ -128,6 +148,7 @@ public class AddStockFragment extends Fragment {
                 // Check if an error occurred.
                 boolean error = false;
 
+                // If any edit box is empty, shake the empty edit text and display an snack bar message
                 if(symbolEdit.getText().toString().equals("")){
                     error = true;
                     YoYo.with(Techniques.Shake)
@@ -176,14 +197,15 @@ public class AddStockFragment extends Fragment {
                             companyNameEdit.getText().toString(),
                             Double.parseDouble(priceEdit.getText().toString()),
                             Integer.parseInt(quantityEdit.getText().toString()),
-                            "2021-03-31"
+                            boughtDateText.getText().toString()
                     );
                     int activeStockId = db.addActiveStock(activeStock);
                     int stockId = db.getStockId(symbolEdit.getText().toString());
 
 
-                    // There is no related stock in stock table
+                    // There is no related stock in stock table. it means that the user logged a new stock information.
                     if(stockId == -1){
+                        // insert new stock into stock table
                         double worth = (activeStock.getPrice() * activeStock.getQuantity()+2*tradingFee) / activeStock.getQuantity();
                         Stock stock = new Stock(
                                 symbolEdit.getText().toString(),
@@ -196,6 +218,7 @@ public class AddStockFragment extends Fragment {
                             stock.setUSD(true);
                         stockId = db.addStock(stock);
                     } else {
+                        // calculate the worth, earning and quantity, and update the existing stock record in stock table
                         double worth = (activeStock.getPrice() * activeStock.getQuantity()+ tradingFee) / activeStock.getQuantity();
                         Stock stock = db.getStock(stockId);
                         int totalQuantity = stock.getQuantity() + activeStock.getQuantity();
@@ -203,9 +226,11 @@ public class AddStockFragment extends Fragment {
 
                         stock.setWorth(totalWorth);
                         stock.setQuantity(totalQuantity);
+
                         db.updateStock(stock);
                     }
 
+                    // add stock and active stock relationship into stock_active database.
                     db.addStockActive(stockId, activeStockId);
 
                     Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
