@@ -365,6 +365,9 @@ public class StockDatabase extends SQLiteOpenHelper {
         return  stocks;
     }
 
+
+    /************************************  Update STOCKS  ****************************************/
+    // Only the stock table need to be updated
     public int updateStock(Stock stock){
 
         SQLiteDatabase db = getWritableDatabase();
@@ -382,6 +385,7 @@ public class StockDatabase extends SQLiteOpenHelper {
                 new String[]{String.valueOf(stock.getId())});
     }
 
+    /************************************  Delete STOCKS  ****************************************/
 
     public void deleteStock(int id){
         SQLiteDatabase db = getWritableDatabase();
@@ -422,15 +426,4 @@ public class StockDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
-    private int getLastRowId(){
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
-        if(cursor.moveToFirst()){
-            int id = cursor.getInt(0);
-            db.close();
-            return id;
-        }
-        db.close();
-        return -1;
-    }
 }

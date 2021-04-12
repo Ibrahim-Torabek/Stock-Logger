@@ -35,5 +35,31 @@
 
     <string name="text_email_address">wusiman.yibulayin01@stclairconnect.ca</string>
     <string name="text_sms_number">12263401234</string>
+    <string name="new_text">Add new stock to the database</string>
+    <string name="increase_text">Increase on hold stock amount</string>
+    <string name="sold_stock_text">Log sold stock</string>
+    <string name="delete_text">Delete Records</string>
+    <string name="date_text">Date</string>
+    <string name="quantity">Quantity</string>
+    <string name="flag_text">Country flag</string>
+    <string name="price">Price</string>
+    <string name="sold_price_text">Sold Price:</string>
+    <string name="sold_date">Sold Date</string>
+    <string name="featured_image">Featured Image</string>
+    <string name="about_text">When we are trading stocks, we need to calculate profit or loss. Most stock trading software does not calculate the detailed costs. In this app, you just need to log into your bought or sold stocks. You can estimate the selling price by setting your willing profit.</string>
+    <string name="enter_stock_symbol">Enter Stock Symbol</string>
+    <string name="call_mobile">Call Mobile:</string>
+    <string name="contact_topic">Contact Topic:</string>
+    <string name="send_an_email">Send an Email</string>
+    <string name="send_an_sms">Send an SMS</string>
+    <string name="android_view_animations">Android View Animations</string>
+    <string name="url_address">https://github.com/daimajia/AndroidViewAnimations</string>
+    <string name="call_image">Phone Call Image</string>
+    <string name="source_url">Source Url:</string>
+    <string name="flicker_com">flicker.com</string>
+    <string name="sms_image">Text Message Image</string>
+    <string name="sme_news_co_uk">sme-news.co.uk</string>
+    <string name="email_image">Send Email Image</string>
+    <string name="cms_coronadousd_net">cms.coronadousd.net</string>
 
 </resources>

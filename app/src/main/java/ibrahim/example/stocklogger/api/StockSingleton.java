@@ -9,9 +9,13 @@ import com.android.volley.toolbox.Volley;
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * <h3>Api SingleTon class</h3>
+ * This class will declare a Volley request singleton class.
+ *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 02/04/21
+ * @see Volley
  */
 public class StockSingleton {
     public static StockSingleton instance;

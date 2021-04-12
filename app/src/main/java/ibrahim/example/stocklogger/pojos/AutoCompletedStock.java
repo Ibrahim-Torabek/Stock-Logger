@@ -4,6 +4,7 @@ package ibrahim.example.stocklogger.pojos;
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * This class helps auto complete text view to store stock symbol, name and usd flag
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 04/04/21
@@ -11,7 +12,7 @@ package ibrahim.example.stocklogger.pojos;
 public class AutoCompletedStock {
     private String symbol;
     private String companyName;
-    private boolean isUSD = false;
+    private boolean isUSD;
 
     public AutoCompletedStock(String symbol, String companyName, boolean isUSD) {
         this.symbol = symbol;

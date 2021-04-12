@@ -73,9 +73,7 @@ public class CreditOtherFragment extends Fragment {
                String url = "https://github.com/daimajia/AndroidViewAnimations";
 
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                //i.setData();
-                // TODO: remove activity
-                getContext().startActivity(i);
+
                 if(i.resolveActivity(getContext().getPackageManager()) != null){
                     getContext().startActivity(i);
                 }

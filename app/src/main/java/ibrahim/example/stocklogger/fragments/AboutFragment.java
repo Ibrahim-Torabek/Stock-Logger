@@ -66,6 +66,7 @@ public class AboutFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
+        // Set Animations
         YoYo.with(Techniques.FadeInLeft)
                 .duration(700)
                 .playOn(view.findViewById(R.id.futruredImageView));

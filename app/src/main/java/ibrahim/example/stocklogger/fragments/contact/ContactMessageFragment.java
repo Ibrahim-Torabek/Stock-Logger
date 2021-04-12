@@ -73,6 +73,8 @@ public class ContactMessageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact_message, container, false);
 
         Spinner smsSpinner = view.findViewById(R.id.smsSpinner);
+
+        // Get email topic from a string_array.
         ArrayAdapter<CharSequence> topicAdapter = ArrayAdapter.createFromResource(getContext(),R.array.smsTitles, android.R.layout.simple_spinner_item);
         topicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         smsSpinner.setAdapter(topicAdapter);
@@ -93,7 +95,6 @@ public class ContactMessageFragment extends Fragment {
                 if(i.resolveActivity(getActivity().getPackageManager()) != null){
                     startActivity(i);
                 } else {
-                    startActivity(i);
                     Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content),"Cannot send an email", Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }

@@ -8,10 +8,14 @@ import androidx.viewpager2.widget.ViewPager2;
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * This class is an animation class for ViewPager2
+ *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 11/04/21
+ * @see ViewPager2
  */
+
 public class ZoomOutPageTransformer implements ViewPager2.PageTransformer {
     private static final float MIN_SCALE = 0.85f;
     private static final float MIN_ALPHA = 0.5f;

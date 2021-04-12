@@ -1,12 +1,17 @@
 package ibrahim.example.stocklogger.pojos;
 
+import ibrahim.example.stocklogger.fragments.credits.CreditIconFragment;
+
 /**
  * <h1>App for Stock Logger</h1>
  * <h2>Android Final Project of MAD405 Course</h2>
  *
+ * This class stores icon credits to list all icons in CreditIconFragment
+ *
  * @author Ibrahim (Wusiman Yibuulayin)
  * @version 1.0
  * @since 10/04/21
+ * @see CreditIconFragment
  */
 public class CreditIcon {
     private int iconResource;
@@ -31,8 +36,5 @@ public class CreditIcon {
         return iconURL;
     }
 
-    @Override
-    public String toString() {
-        return iconName;
-    }
+
 }

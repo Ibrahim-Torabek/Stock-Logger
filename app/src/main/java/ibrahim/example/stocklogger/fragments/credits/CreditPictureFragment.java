@@ -90,9 +90,7 @@ public class CreditPictureFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            //i.setData();
-            // TODO: remove activity
-            getContext().startActivity(i);
+
             if(i.resolveActivity(getContext().getPackageManager()) != null){
                 getContext().startActivity(i);
             }

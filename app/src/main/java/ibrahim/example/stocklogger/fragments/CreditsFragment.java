@@ -71,10 +71,13 @@ public class CreditsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_credits, container, false);
 
-
+        // use viewpager2 to display three fragments
         ViewPager2 creditViewPager = view.findViewById(R.id.creditViewPager);
+
+        // Set the common viewPager2 adapter to display three credit fragments, and provide PAGE_CREDITS parameter to identify the target fragments
         creditViewPager.setAdapter(new ContactViewPagerAdapter(getActivity(), ContactViewPagerAdapter.PAGE_CREDITS));
-        //contactViewPager.setPageTransformer(new ContactFragment.DepthPageTransformer());
+
+        // Set Transformer
         creditViewPager.setPageTransformer(new ZoomOutPageTransformer());
 
         TabLayout tabLayout = view.findViewById(R.id.creditTabLayout);
@@ -84,6 +87,7 @@ public class CreditsFragment extends Fragment {
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        // Display tab title for each tab.
                         switch (position){
                             case 0:
                                 tab.setText("Icons");

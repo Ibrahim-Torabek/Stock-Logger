@@ -69,6 +69,8 @@ public class CreditIconFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_credit_icon, container, false);
+
+        // Create Recycler View's array list to display icon and source name, and redirect to the url
         ArrayList<CreditIcon> creditIcons = new ArrayList<>();
         creditIcons.add(new CreditIcon(R.drawable.ic_canada,"Freepik","https://www.flaticon.com/free-icon/canada_197430"));
         creditIcons.add(new CreditIcon(R.drawable.ic_united_states,"Freepik","https://www.flaticon.com/free-icon/united-states-of-america_197484"));
