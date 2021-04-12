@@ -3,6 +3,7 @@ package ibrahim.example.stocklogger.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
@@ -16,12 +17,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import ibrahim.example.stocklogger.adapters.SymbolAutoCompleteAdapter;
 import ibrahim.example.stocklogger.R;
@@ -46,7 +50,7 @@ public class AddStockFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private String[] symbols;
+    public static TextView boughtDateText;
 
     // Arraylist of auto completed stocks
     public static ArrayList<AutoCompletedStock> autoCompletedStocks = new ArrayList<>();
@@ -93,6 +97,7 @@ public class AddStockFragment extends Fragment {
         EditText companyNameEdit = view.findViewById(R.id.companyNameEdit);
         EditText priceEdit = view.findViewById(R.id.priceEdit);
         EditText quantityEdit = view.findViewById(R.id.quantityEdit);
+        boughtDateText = view.findViewById(R.id.boughtDateText);
         Switch isUSD = view.findViewById(R.id.isUSD);
         Button addButton = view.findViewById(R.id.addButton);
 
@@ -108,6 +113,17 @@ public class AddStockFragment extends Fragment {
                     companyNameEdit.setText(autoCompletedStocks.get(i).getCompanyName());
                     isUSD.setChecked(autoCompletedStocks.get(i).isUSD());
                 }
+            }
+        });
+
+        Calendar c = Calendar.getInstance();
+        boughtDateText.setText(DateFormat.getDateInstance().format(c.getTime()));
+        boughtDateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open Date picker dialog when clicked
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getFragmentManager(), "date picker");
             }
         });
 
@@ -181,7 +197,7 @@ public class AddStockFragment extends Fragment {
                             companyNameEdit.getText().toString(),
                             Double.parseDouble(priceEdit.getText().toString()),
                             Integer.parseInt(quantityEdit.getText().toString()),
-                            "2021-03-31"
+                            boughtDateText.getText().toString()
                     );
                     int activeStockId = db.addActiveStock(activeStock);
                     int stockId = db.getStockId(symbolEdit.getText().toString());

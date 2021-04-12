@@ -82,11 +82,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="fill_horizontal"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberSigned"
         android:paddingTop="@dimen/layout_margin"
         android:textSize="@dimen/text_size"
-        android:autofillHints="" />
+        android:hint="Negative for selling part"/>
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/layout_margin"
+        android:text="Date:"
+        android:textSize="@dimen/text_size" />
+
+    <TextView
+        android:id="@+id/boughtDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/layout_margin"
+        android:ems="10"
+        android:textSize="@dimen/text_size" />
 
     <TextView
         android:id="@+id/textView6"
@@ -96,13 +113,15 @@
         android:text="@string/currency_text"
         android:textSize="@dimen/text_size" />
 
+
     <Switch
         android:id="@+id/isUSD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:paddingTop="@dimen/layout_margin"
-        android:textSize="@dimen/text_size" />
+        android:textSize="@dimen/text_size"
+        />
 
     <Button
         android:id="@+id/addButton"

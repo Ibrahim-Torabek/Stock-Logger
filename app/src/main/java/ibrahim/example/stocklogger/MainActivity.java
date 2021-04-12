@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import ibrahim.example.stocklogger.fragments.AddStockFragment;
 import ibrahim.example.stocklogger.fragments.SellStockFragment;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -109,8 +110,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         c.set(Calendar.DAY_OF_MONTH, i2);
 
         // check if the calendar text date in SellStockFragment is active.
-        if(SellStockFragment.calendarTextDate != null)
-            SellStockFragment.calendarTextDate.setText(DateFormat.getDateInstance().format(c.getTime()));
+        if(SellStockFragment.soldDateText != null)
+            SellStockFragment.soldDateText.setText(DateFormat.getDateInstance().format(c.getTime()));
+
+        if(AddStockFragment.boughtDateText != null)
+            AddStockFragment.boughtDateText.setText(DateFormat.getDateInstance().format(c.getTime()));
     }
 
 

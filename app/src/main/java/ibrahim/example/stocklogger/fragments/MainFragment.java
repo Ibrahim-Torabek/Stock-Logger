@@ -200,7 +200,7 @@ public class MainFragment extends Fragment {
 
         totalEarning = totalActiveEarning + totalSoldEarning;
         totalEarningsTextView.setText(String.format("$%.02f", totalEarning));
-        balanceTextView.setText(String.valueOf(investment + totalEarning));
+        balanceTextView.setText(String.format("$%.02f", totalEarning + investment));
 
         if(investment != 0){
             balanceTextView.setVisibility(View.VISIBLE);
