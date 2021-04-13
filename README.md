@@ -9,7 +9,10 @@
 
 ## Table of contents
 * [Description](#description)
+* [Getting Started](#getting-started)
 * [Database](#database)
+* [Prerequisites](#prerequisites)
+* [Screen Shots](#screen-shots)
 * [Acknowledgments](#acknowledgments)
 
 ## Description
@@ -18,7 +21,21 @@ Most stock trading software does not calculate the detailed costs.
 In this app, you just need to log into your bought or sold stocks.
 You can estimate the selling price by setting your willing profit.
 
-![Usage](screenshots/animation.gif)
+![Usage](screenshots/main.gif)
+
+## Getting Started
+Stock Logger is an Android app, and it is very easy to use.
+You can use this app to log your stock tradings. You can 
+add stock which you bought in the stock market, and the app
+will calculate the profit of that stock. you can increase and
+decrease your holding stock's amount when you bought or sold some 
+quantity of a spesific stock. You can log sold stocks in this app,
+and the system will dipsplay them seperately. Because the user 
+of this app only targetted the Canadians, so this app only record
+stocks in the US stock market and Canada stock market. You should 
+setup your brokerage's trading fee so that the app can caculate 
+eactly worth price of a stokc. This app also provides some contact 
+information on a contact page.
 
 ## Database
 ### Database Name: Stock
@@ -144,6 +161,18 @@ You can estimate the selling price by setting your willing profit.
 </table>
 
 <hr>
+
+## Prerequisites
+This application needs to install in an Android phone, and the Android version
+is at least Android 4.4 (Kit Kat).
+
+
+## Screen Shots
+
+### Image of Menu Fragment
+![Menu](screenshots/menu.png)
+
+
 
 ## Acknowledgments
 I want to especially thank my teacher Prof. Cai Filiault.
