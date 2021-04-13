@@ -173,6 +173,41 @@ is at least Android 4.4 (Kit Kat).
 ![Menu](screenshots/menu.png)
 
 
+### Images of Dashboard(main) Fragment
+![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard1.png)
+
+### Images of Add Stock Fragment
+![AddStock](screenshots/add1.png)
+![AddStock](screenshots/add2.png)
+
+
+### Image of Sell Stock Fragment
+![Soldstock](screenshots/sell.png)
+
+### Image of Sold Stock Fragment
+![Soldstock](screenshots/sold_stock.png)
+
+### Image of About Us Fragment
+![About](screenshots/about.png)
+
+### Image of Contact Fragment
+![Contact](screenshots/contact.png)
+
+### Image of Credits Fragment
+![Credits](screenshots/credits.png)
+
+### Image of Setting Activity
+![Setting](screenshots/setting.png)
+
+### Images of Tablet
+![Tablet](screenshots/t_dash.png)
+
+![Tablet](screenshots/t_sold.png)
+
+![Tablet](screenshots/t_contact.png)
+
+
 
 ## Acknowledgments
 I want to especially thank my teacher Prof. Cai Filiault.
