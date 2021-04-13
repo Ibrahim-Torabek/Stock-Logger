@@ -18,6 +18,8 @@ Most stock trading software does not calculate the detailed costs.
 In this app, you just need to log into your bought or sold stocks.
 You can estimate the selling price by setting your willing profit.
 
+![Usage](screenshots/animation.gif)
+
 ## Database
 ### Database Name: Stock
 ### Tables:
@@ -58,6 +60,7 @@ You can estimate the selling price by setting your willing profit.
         <td>int</td>
     </tr>
 </table>
+
 ### 2. Active Stock Table
 #### Table Name: active
 #### Table Columns:
@@ -109,6 +112,7 @@ You can estimate the selling price by setting your willing profit.
         <td>int, forien key to active table</td>
     </tr>
 </table>
+
 ### 4. Sold Stock Table
 #### Table Name: sold
 #### Table Columns:
