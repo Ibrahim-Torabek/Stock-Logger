@@ -60,27 +60,27 @@ public class ActiveStockRecyclerAdapter extends RecyclerView.Adapter<ActiveStock
         holder.activePriceTextView.setText(String.format("$%.2f", stock.getPrice()));
         holder.activeQuantityTextView.setText(String.valueOf(stock.getQuantity()));
 
-        holder.deleteActiveImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new MaterialAlertDialogBuilder(context)
-                        .setTitle(stock.getSymbol())
-                        .setMessage("Do you want to delete " + stock.getBoughtDate() + " record of " + stock.getSymbol() + "?")
-                        .setIcon(android.R.drawable.ic_dialog_info)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                StockDatabase db = new StockDatabase(context);
-                                db.deleteActiveStock(stock.getId());
-                                db.close();
-                                activeStocks.remove(position);
-                                notifyItemRemoved(position);
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-            }
-        });
+//        holder.deleteActiveImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new MaterialAlertDialogBuilder(context)
+//                        .setTitle(stock.getSymbol())
+//                        .setMessage("Do you want to delete " + stock.getBoughtDate() + " record of " + stock.getSymbol() + "?")
+//                        .setIcon(android.R.drawable.ic_dialog_info)
+//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                StockDatabase db = new StockDatabase(context);
+//                                db.deleteActiveStock(stock.getId());
+//                                db.close();
+//                                activeStocks.remove(position);
+//                                notifyItemRemoved(position);
+//                            }
+//                        })
+//                        .setNegativeButton("No", null)
+//                        .show();
+//            }
+//        });
     }
 
     @Override
@@ -93,7 +93,7 @@ public class ActiveStockRecyclerAdapter extends RecyclerView.Adapter<ActiveStock
         protected TextView activeDateTextView;
         protected TextView activePriceTextView;
         protected TextView activeQuantityTextView;
-        protected ImageView deleteActiveImageView;
+        //protected ImageView deleteActiveImageView;
 
         public ActiveStockRecyclerHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,7 +101,7 @@ public class ActiveStockRecyclerAdapter extends RecyclerView.Adapter<ActiveStock
             activeDateTextView = itemView.findViewById(R.id.activeDateTextView);
             activePriceTextView = itemView.findViewById(R.id.activePriceTextView);
             activeQuantityTextView = itemView.findViewById(R.id.activeQuantityTextView);
-            deleteActiveImageView = itemView.findViewById(R.id.deleteActiveImageView);
+            //deleteActiveImageView = itemView.findViewById(R.id.deleteActiveImageView);
         }
     }
 }

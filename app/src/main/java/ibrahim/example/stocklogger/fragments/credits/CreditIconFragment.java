@@ -77,6 +77,8 @@ public class CreditIconFragment extends Fragment {
         creditIcons.add(new CreditIcon(R.drawable.ic_information,"Freepik","https://www.flaticon.com/free-icon/information_4293726"));
         creditIcons.add(new CreditIcon(R.drawable.ic_contact,"Smashicons","https://www.flaticon.com/free-icon/contact_1034153"));
         creditIcons.add(new CreditIcon(R.drawable.ic_credits,"Eucalyp","https://www.flaticon.com/free-icon/descriptor_2245222"));
+        creditIcons.add(new CreditIcon(R.drawable.ic_investing,"Ultimatearm","https://www.flaticon.com/free-icon/investing_3310787"));
+        creditIcons.add(new CreditIcon(R.drawable.ic_exchange_rate,"Ultimatearm","https://www.flaticon.com/free-icon/exchange-rate_330999"));
 
         RecyclerView creditIconRecyclerView = view.findViewById(R.id.creditIconRecyclerView);
         creditIconRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
