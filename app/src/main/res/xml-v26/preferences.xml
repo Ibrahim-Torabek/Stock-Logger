@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
+        android:icon="@drawable/ic_united_states"
         android:title="Rates"
-        android:icon="@drawable/ic_trade"
-        android:iconSpaceReserved="true">
+
+        >
 
         <EditTextPreference
             android:defaultValue="1.26"
@@ -13,28 +15,35 @@
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="Enter Current US Dollar's Rating"
-            android:title="Current USD Rating" />
+            android:title="Current USD Rating"
+            android:icon="@drawable/ic_united_states"
+            />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="Investing"
-        android:icon="@drawable/ic_stock_market">
+        android:icon="@drawable/ic_investing">
 
         <EditTextPreference
             android:key="investing_amount"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="You can enter your investog amount here.\nMain page can display your total amount."
-            android:title="Investing Amount" />
+            android:title="Investing Amount"
+            android:icon="@drawable/ic_investing"
+            />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="Trading Fee"
-        app:icon="@drawable/ic_trade">
+        android:icon="@drawable/ic_exchange_rate">
         <EditTextPreference
             android:defaultValue="6.95"
             android:key="tradingFee"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Bank's Traiding Fee" />
+            android:title="Brokerage's Trading Fee"
+            android:summary="You must enter your brokerage's trading fee."
+            android:icon="@drawable/ic_exchange_rate"
+            />
     </PreferenceCategory>
 </PreferenceScreen>

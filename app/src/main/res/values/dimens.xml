@@ -15,5 +15,6 @@
     <dimen name="icon_size">40dp</dimen>
     <dimen name="dashboard_text_size">30sp</dimen>
     <dimen name="flag_size">40dp</dimen>
+    <dimen name="image_credit_size">500dp</dimen>
 
 </resources>
