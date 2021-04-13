@@ -1,5 +1,7 @@
 package ibrahim.example.stocklogger.pojos;
 
+import androidx.annotation.NonNull;
+
 import ibrahim.example.stocklogger.fragments.credits.CreditIconFragment;
 
 /**
@@ -36,5 +38,9 @@ public class CreditIcon {
         return iconURL;
     }
 
-
+    @NonNull
+    @Override
+    public String toString() {
+        return iconName;
+    }
 }
