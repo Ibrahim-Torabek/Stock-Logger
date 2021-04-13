@@ -174,38 +174,38 @@ is at least Android 4.4 (Kit Kat).
 
 
 ### Images of Dashboard(main) Fragment
-![Dashboard](screenshots/dashboard.png)
-![Dashboard](screenshots/dashboard1.png)
+<kbd>![Dashboard](screenshots/dashboard.png)</kbd>
+<kbd>![Dashboard](screenshots/dashboard1.png)</kbd>
 
 ### Images of Add Stock Fragment
-![AddStock](screenshots/add1.png)
-![AddStock](screenshots/add2.png)
+<kbd>![AddStock](screenshots/add1.png)</kbd>
+<kbd>![AddStock](screenshots/add2.png)</kbd>
 
 
 ### Image of Sell Stock Fragment
-![Soldstock](screenshots/sell.png)
+<kbd>![Soldstock](screenshots/sell.png)</kbd>
 
 ### Image of Sold Stock Fragment
-![Soldstock](screenshots/sold_stock.png)
+<kbd>![Soldstock](screenshots/sold_stock.png)</kbd>
 
 ### Image of About Us Fragment
-![About](screenshots/about.png)
+<kbd>![About](screenshots/about.png)</kbd>
 
 ### Image of Contact Fragment
-![Contact](screenshots/contact.png)
+<kbd>![Contact](screenshots/contact.png)</kbd>
 
 ### Image of Credits Fragment
-![Credits](screenshots/credits.png)
+<kbd>![Credits](screenshots/credits.png)</kbd>
 
 ### Image of Setting Activity
-![Setting](screenshots/setting.png)
+<kbd>![Setting](screenshots/setting.png)</kbd>
 
 ### Images of Tablet
-![Tablet](screenshots/t_dash.png)
+<kbd>![Tablet](screenshots/t_dash.png)</kbd>
 
-![Tablet](screenshots/t_sold.png)
+<kbd>![Tablet](screenshots/t_sold.png)</kbd>
 
-![Tablet](screenshots/t_contact.png)
+<kbd>![Tablet](screenshots/t_contact.png)</kbd>
 
 
 
