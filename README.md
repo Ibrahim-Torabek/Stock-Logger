@@ -170,7 +170,7 @@ is at least Android 4.4 (Kit Kat).
 ## Screen Shots
 
 ### Image of Menu Fragment
-![Menu](screenshots/menu.png)
+<kbd>![Menu](screenshots/menu.png)</kbd>
 
 
 ### Images of Dashboard(main) Fragment
